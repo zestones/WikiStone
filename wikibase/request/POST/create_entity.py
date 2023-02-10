@@ -1,12 +1,12 @@
 
 import json
-import api_global
+from api_global import session
 
 # the data passed to the API must be JSON in string form.  Because of Python's use of curly braces in format strings, it's
 # best to create the data to be passed as a dictionary, then use json.dumps to convert it into string form. 
 # Here's what we are building:
 '''
-dataDict = {
+data_dict = {
     "labels":{
         "en":{"language":"en","value":"Fred Pig"},
         "es":{"language":"es","value":"Puerco Frederico"}
@@ -16,33 +16,35 @@ dataDict = {
         }
     }
 '''
-def createEntity(api_url, edit_token, list_of_labels, list_of_descriptions):
+def create_entity(api_url, edit_token, list_of_labels, list_of_descriptions):
 
-    dataDict, innerDict = {}, {}
+    data_dict, inner_dict = {}, {}
     for label in list_of_labels:
-        innerDict[label['language']] = {"language": label['language'], "value": label['string']}
+        inner_dict[label['language']] = {"language": label['language'], "value": label['string']}
    
-    dataDict['labels'] =  innerDict
+    data_dict['labels'] =  inner_dict
 
-    innerDict = {}
+    inner_dict = {}
     for description in list_of_descriptions:
-        innerDict[description['language']] = {"language": description['language'], "value": description['string']}
+        inner_dict[description['language']] = {"language": description['language'], "value": description['string']}
     
-    dataDict['descriptions'] =  innerDict
+    data_dict['descriptions'] =  inner_dict
 
-    dataString = json.dumps(dataDict)
+    data_string = json.dumps(data_dict)
     parameters = {
         'action': 'wbeditentity',
         'format': 'json',
         'new': 'item',
         'token': edit_token,
         # note: the data value is a string.  I think it will get URL encoded by requests before posting
-        'data': dataString
+        'data': data_string
     }
-    r = api_global.session.post(api_url, data=parameters)
+    
+    r = session.post(api_url, data=parameters)
     response = r.text
+    
     if response[2:7] == 'error':
-        print(r.response)
+        # print(response)
         return "error"
     else:
         data = r.json()

@@ -1,3 +1,5 @@
+import sys
+sys.path.append('../')
 import api_global
 
 # create a new property
