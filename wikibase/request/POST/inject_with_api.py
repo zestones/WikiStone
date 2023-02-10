@@ -6,20 +6,19 @@ import api_global
 
 import sys
 
-
 sys.path.append('../GET/')
 from get_property import get_property_id
 
 sys.path.append('../../authentification/')
 from wiki_auth import authenticate
 
-########################### AUTH ##############################
+########################### WIKIBOT AUTH ##############################
 login_info = authenticate()
 
 csrf_token = login_info[0]
 api_url = login_info[1]
 
-########################## API ################################
+########################## RETRIEVE JSON API ################################
 # Fetch data from the API
 url = "https://data.culture.gouv.fr/api/records/1.0/search/?dataset=liste-et-localisation-des-musees-de-france&q=&facet=region_administrative&facet=departement&refine.departement=Loire"
 response = requests.get(url)
@@ -32,7 +31,7 @@ labels, descriptions = [], []
 property_labels = ["address",
                    "postal code", "city", "latitude", "longitude"]
 
-property_datatypes = ["string", "string", "string",
+property_datatypes = ["string", "string",
                       "string", "globe-coordinate", "globe-coordinate"]
 
 entity_id_name = []
@@ -95,5 +94,8 @@ for entity in entity_id_name:
     for property_label, property_datatype in zip(property_labels, property_datatypes):
         property_id = get_property_id(api_url, property_label)
         value = museum[property_label]
-
+        
+        if property_label == 'latitude' or property_label == 'longitude':
+            value = [museum['latitude'], museum['longitude']] 
+        
         write_statement(api_url, csrf_token, entity_id, property_id, value, property_datatype)
