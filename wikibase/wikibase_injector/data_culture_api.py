@@ -74,13 +74,23 @@ def inject_data(py_wb):
     
     # Loop through museums and create Wikibase items with properties and values
     for museum in museums:
-        item = py_wb.Item().create(museum["name"])
+        exist_item, claim_list = False, {}
         
+        if py_wb.Item().existItem(museum["name"]):
+            item_id = py_wb.Item().getItemId(museum["name"])
+            item = py_wb.Item().get(entity_id=item_id)
+            
+            exist_item = True
+            claim_list = item.claims.to_dict()
+        else : 
+            item = py_wb.Item().create(museum["name"])
+
         print(Fore.MAGENTA + "====================== ITEM ======================")
         print(Fore.YELLOW + " |\tItem ID: " + Fore.WHITE +  item.entity_id)
         print(Fore.YELLOW + " |\tItem Label: ", Fore.WHITE,  item.label.get())
         print(Fore.YELLOW + " |\tItem Description: ", Fore.WHITE, item.description.get())
-        
+    
+
         # Loop through properties and add claims to item
         for prop_label, value in museum.items():
 
@@ -91,7 +101,7 @@ def inject_data(py_wb):
             if prop is None:
                 continue
 
-                # Create value based on data type
+            # Create value based on data type
             if properties[prop_label] == "StringValue":
                 value = py_wb.StringValue().create(museum[prop_label])
             elif properties[prop_label] == "monolingualtext":
@@ -106,12 +116,23 @@ def inject_data(py_wb):
                 value = py_wb.UrlValue().create(("https://" + museum[prop_label]))
             else:
                 continue
-
-            # Add claim to item
-            claim = item.claims.add(prop, value)
             
+            # Update the existant claim
+            if exist_item and prop_id in claim_list:
+                for claim in claim_list[prop_id]:
+                    if claim.value.__class__.__name__ == "GeoLocation":
+                        if str(claim.value.latitude) != str(value.latitude) or str(claim.value.longitude) != str(value.longitude):
+                            claim = item.claims.add(prop, value)
+                            break
+                        
+                    elif str(claim.value).lower() != str(value).lower() :
+                        claim = item.claims.add(prop, value)
+                        break
+            else:
+                claim = item.claims.add(prop, value)
+
             print("---------- " + Fore.BLUE + "Statements" + Fore.WHITE +" ----------")
-            print(Fore.YELLOW + " |\tClaim rank: ", Fore.WHITE,  claim.rank)
+            print(Fore.YELLOW + " |\tClaim rank: ", Fore.WHITE, claim.rank)
 
             print("............ " + Fore.BLUE + "Property" + Fore.WHITE + " ............")
             print(Fore.YELLOW + " |\tProperty ID: ", Fore.WHITE, prop_id)
@@ -121,3 +142,4 @@ def inject_data(py_wb):
             print()
 
         print(Style.RESET_ALL)
+        break

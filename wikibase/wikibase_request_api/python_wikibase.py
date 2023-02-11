@@ -49,7 +49,7 @@ class PyWikibase:
             summary=summary,
             config_path=config_path,
         )
-        print(config_path)
+
         self.language = language
         self.api_url = api_url
 

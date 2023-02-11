@@ -133,6 +133,40 @@ class Item(Entity):
             "language": self.language, "value": label}}}
         return super()._create(content)
 
+    def existItem(self, label):
+        params = {
+            "action": "wbsearchentities",
+            "format": "json",
+            "language": "en",
+            "type": "item",
+            "search": label
+        }
+
+        response = requests.get(self.py_wb.api_url, params=params).json()
+        if "success" in response and response["success"] == 1:
+            if "search" in response and len(response["search"]) > 0:
+                return True
+
+        return False
+    
+    def getItemId(self, item_label):
+        params = {
+            "action": "wbsearchentities",
+            "language": "en",
+            "format": "json",
+            "type": "item",
+            "limit": 1,
+            "search": item_label
+        }
+
+        response = requests.get(self.py_wb.api_url, params=params).json()
+        if "success" in response and response["success"] == 1:
+            if "search" in response and len(response["search"]) > 0:
+                return response["search"][0]["id"]
+
+        return None
+
+
 
 class Property(Entity):
     def __init__(self, py_wb, wb, language):
@@ -178,8 +212,7 @@ class Property(Entity):
             "type": "property",
             "search": prop_label
         }
-
-            
+     
         response = requests.get(self.py_wb.api_url, params=params).json()
         if "success" in response and response["success"] == 1:
             if "search" in response and len(response["search"]) > 0:
