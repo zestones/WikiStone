@@ -1,0 +1,354 @@
+{
+    "nhits": 17,
+    "parameters": {
+      "dataset": "liste-et-localisation-des-musees-de-france",
+      "rows": 10,
+      "start": 0,
+      "facet": [
+        "region_administrative",
+        "departement"
+      ],
+      "format": "json",
+      "timezone": "UTC"
+    },
+    "records": [
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "5b22b5d1d63a8ab6ee10ff151d4a6d56833d2b76",
+        "fields": {
+          "adresse": "456 route du mus\u00e9e",
+          "telephone": "04 77 50 29 20",
+          "commune": "Estivareilles",
+          "latitude": 45.415906,
+          "ref_deps": "4209101",
+          "url": "estivareilles42.fr/2019/04/11/le-musee/",
+          "code_postal": "42380",
+          "identifiant_museofile": "M1013",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e de l'arm\u00e9e secr\u00e8te et de la r\u00e9sistance",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            45.415906,
+            4.010414
+          ],
+          "longitude": 4.010414
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.010414,
+            45.415906
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "90dd9d0a84d55c4225f437746273eb0deda252bb",
+        "fields": {
+          "adresse": "La Terrasse",
+          "lieu": "BP 80241",
+          "telephone": "04 77 79 52 52",
+          "commune": "Saint-Etienne",
+          "latitude": 45.46964793515552,
+          "ref_deps": "4221801",
+          "url": "mamc.saint-etienne.fr/fr",
+          "code_postal": "42006",
+          "identifiant_museofile": "M1024",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e d'art moderne et contemporain de Saint-Etienne M\u00e9tropole - mus\u00e9e d'art moderne",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            45.46964793515552,
+            4.374526863293208
+          ],
+          "longitude": 4.374526863293208
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.374526863293208,
+            45.46964793515552
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "3f2593777532b2a9e571cc76497121966b00d38d",
+        "fields": {
+          "adresse": "89 rue de la Grye",
+          "telephone": "04 77 65 60 99",
+          "commune": "Ambierle",
+          "latitude": 46.105434,
+          "ref_deps": "4200301",
+          "url": "museealicetaverne.fr/",
+          "code_postal": "42820",
+          "identifiant_museofile": "M1009",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e Alice Taverne",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            46.105434,
+            3.896167
+          ],
+          "longitude": 3.896167
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.896167,
+            46.105434
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "5dc87f40abb85ed0a489c311a845efb5995a5db1",
+        "fields": {
+          "adresse": "9 Boulevard Leclerc",
+          "telephone": "04 77 60 28 84",
+          "commune": "Charlieu",
+          "latitude": 46.160301,
+          "ref_deps": "4205202",
+          "url": "musees-de-charlieu.webnode.fr/",
+          "code_postal": "42190",
+          "identifiant_museofile": "M1010",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e de la soierie",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            46.160301,
+            4.17052
+          ],
+          "longitude": 4.17052
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.17052,
+            46.160301
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "fa3f42eca93349dce1b17fff690f4d6d9e227b05",
+        "fields": {
+          "adresse": "3 rue Victor de Laprade",
+          "telephone": "04 77 26 24 48",
+          "commune": "Feurs",
+          "latitude": 45.744191,
+          "ref_deps": "4209401",
+          "url": "www.feurs.org/culture/musee-d-archeologie.html",
+          "code_postal": "42110",
+          "identifiant_museofile": "M1014",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e de Feurs",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            45.744191,
+            4.219803
+          ],
+          "longitude": 4.219803
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.219803,
+            45.744191
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "ae295475a5c9715b651e81428fffbc496bb229ce",
+        "fields": {
+          "adresse": "Rue Florimont Robertet",
+          "lieu": "La Diana",
+          "telephone": "04 77 96 01 10",
+          "commune": "Montbrison",
+          "latitude": 45.60543,
+          "ref_deps": "4214702",
+          "url": "www.ladiana.com",
+          "code_postal": "42600",
+          "identifiant_museofile": "M1017",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e de la Diana",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            45.60543,
+            4.066822
+          ],
+          "longitude": 4.066822
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.066822,
+            45.60543
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "af65e2933fa6ec35b3be1b525d7caa48ff30e85b",
+        "fields": {
+          "adresse": "22 rue Anatole France",
+          "lieu": "H\u00f4tel Valence de la Minardi\u00e8re",
+          "telephone": "04 77 23 68 77",
+          "commune": "Roanne",
+          "latitude": 46.034953,
+          "ref_deps": "4218701",
+          "url": "www.museederoanne.fr/musee-des-beaux-arts-et-d-archeologie-joseph-dechelette-site-officiel-2017.html",
+          "code_postal": "42300",
+          "identifiant_museofile": "M1020",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e Joseph D\u00e9chelette",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            46.034953,
+            4.069842
+          ],
+          "longitude": 4.069842
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.069842,
+            46.034953
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "1f80f4a8360b634ad39c07dfada823e7ef44d710",
+        "fields": {
+          "adresse": "3 Boulevard Franchet d'Esperey",
+          "lieu": "Puits Couriot / Parc-Mus\u00e9e de la Mine ; Parc Joseph Sanguedolce",
+          "telephone": "04 77 43 83 23",
+          "commune": "Saint-Etienne",
+          "latitude": 45.438944,
+          "ref_deps": "4221804",
+          "url": "www.musee-mine.saint-etienne.fr/",
+          "code_postal": "42000",
+          "identifiant_museofile": "M1025",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e de la mine",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            45.438944,
+            4.376487
+          ],
+          "longitude": 4.376487
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.376487,
+            45.438944
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "1e0862151ade41301cea994ad54f513179cea31e",
+        "fields": {
+          "adresse": "Place Madeleine Rousseau",
+          "telephone": "04 77 52 03 11",
+          "commune": "Saint-Just-Saint-Rambert",
+          "latitude": 45.500657,
+          "ref_deps": "4227901",
+          "url": "www.stjust-strambert.fr/sorties-et-loisirs/culture-et-evenements/musee-des-civilisations-daniel-pouget/",
+          "code_postal": "42170",
+          "identifiant_museofile": "M1028",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e des civilisations : Daniel Pouget",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            45.500657,
+            4.242057
+          ],
+          "longitude": 4.242057
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.242057,
+            45.500657
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      },
+      {
+        "datasetid": "liste-et-localisation-des-musees-de-france",
+        "recordid": "d6febd835b57e1fc12f12518b980c9870b0d64a7",
+        "fields": {
+          "adresse": "Quartier Saint-Joseph Place Alex Foll\u00e9as",
+          "telephone": "04 77 50 67 97",
+          "commune": "Usson-en-Forez",
+          "latitude": 45.392445,
+          "ref_deps": "4231801",
+          "url": "www.ecomusee-usson-en-forez.fr/",
+          "code_postal": "42550",
+          "identifiant_museofile": "M1029",
+          "departement": "Loire",
+          "nom_officiel_du_musee": "mus\u00e9e rural",
+          "region_administrative": "Auvergne-Rh\u00f4ne-Alpes",
+          "date_arrete_attribution_appellation": "2003-02-01",
+          "geolocalisation": [
+            45.392445,
+            3.943885
+          ],
+          "longitude": 3.943885
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.943885,
+            45.392445
+          ]
+        },
+        "record_timestamp": "2022-12-08T16:43:15.289Z"
+      }
+    ],
+    "facet_groups": [
+      {
+        "name": "region_administrative",
+        "facets": [
+          {
+            "name": "Auvergne-Rh\u00f4ne-Alpes",
+            "count": 17,
+            "state": "displayed",
+            "path": "Auvergne-Rh\u00f4ne-Alpes"
+          }
+        ]
+      },
+      {
+        "name": "departement",
+        "facets": [
+          {
+            "name": "Loire",
+            "count": 17,
+            "state": "refined",
+            "path": "Loire"
+          }
+        ]
+      }
+    ]
+  }
