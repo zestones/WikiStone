@@ -148,7 +148,7 @@ class Item(Entity):
                 return True
 
         return False
-    
+
     def getItemId(self, item_label):
         params = {
             "action": "wbsearchentities",
@@ -165,7 +165,6 @@ class Item(Entity):
                 return response["search"][0]["id"]
 
         return None
-
 
 
 class Property(Entity):
@@ -196,6 +195,7 @@ class Property(Entity):
         }
 
         response = requests.get(self.py_wb.api_url, params=params).json()
+
         if "success" in response and response["success"] == 1:
             if "search" in response and len(response["search"]) > 0:
                 return response["search"][0]["id"]
@@ -212,14 +212,14 @@ class Property(Entity):
             "type": "property",
             "search": prop_label
         }
-     
+
         response = requests.get(self.py_wb.api_url, params=params).json()
         if "success" in response and response["success"] == 1:
             if "search" in response and len(response["search"]) > 0:
                 return True
 
         return False
-        
+
 
 def check_item_param(prop, param_name="item"):
     if not isinstance(prop, Item):
