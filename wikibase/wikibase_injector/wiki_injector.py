@@ -13,6 +13,22 @@ def print_property(prop, title):
     # print(Fore.CYAN + "| Description: " + Fore.WHITE + str(prop.description))
     print(Fore.YELLOW + "------------------------------------------" + Style.RESET_ALL)
 
+# Print the details of an item
+def print_item(item):
+    print(Fore.MAGENTA + "====================== ITEM ======================")
+    print(Fore.YELLOW + " |\tItem ID: " + Fore.WHITE +  item.entity_id)
+    print(Fore.YELLOW + " |\tItem Label: ", Fore.WHITE,  item.label.get())
+    print(Fore.YELLOW + " |\tItem Description: ", Fore.WHITE, item.description.get())
+
+# Print the details of a statement
+def print_statement_details(claim, prop_id, prop_label):
+    print("---------- " + Fore.BLUE + "Statements" + Fore.WHITE +" ----------")
+    print(Fore.YELLOW + " |\tClaim rank: ", Fore.WHITE, claim.rank)
+
+    print("............ " + Fore.BLUE + "Property" + Fore.WHITE + " ............")
+    print(Fore.YELLOW + " |\tProperty ID: ", Fore.WHITE, prop_id)
+    print(Fore.YELLOW + " |\tProperty Label: ", Fore.WHITE, prop_label)
+    print(Fore.YELLOW + " |\tClaim value: " , Fore.WHITE , claim.value)
 
 # Define function to create properties if they don't exist
 def create_property(py_wb, prop_label, prop_type):
@@ -58,73 +74,104 @@ def create_claim_value(py_wb, properties, prop_label, object):
 
     return value
 
+# Update an item in the wikibase
+def update_item(py_wb, object):
+    item_id = py_wb.Item().getItemId(object[PROP_LABEL_NAME])
+    item = py_wb.Item().get(entity_id=item_id)
+            
+    description = item.description.get()
+    
+    # check if the descriptions item need to be Updated
+    if ITEM_DESCRIPTION in object and object[ITEM_DESCRIPTION] != description:
+        item.Description().set(description=object[ITEM_DESCRIPTION])
+
+# create a new item in the wikibase
+def create_item(py_wb, object):
+    item = py_wb.Item().create(object[PROP_LABEL_NAME])
+    
+    # Add a description to the item
+    if ITEM_DESCRIPTION in object:
+        item.Description().set(description=object[ITEM_DESCRIPTION])
+        
+    return item
+
+# Update the claim with the new value
+def update_claim(item, claim, claim_list, prop, value):
+
+    for claim in claim_list[item.entity_id]:
+        # Check if the claim value is of type PROP_VALUE_COORDINATE
+        if claim.value.__class__.__name__ == PROP_VALUE_COORDINATE:
+            if str(claim.value.latitude) != str(value.latitude) or str(claim.value.longitude) != str(value.longitude):
+                claim = item.claims.add(prop, value)
+                break
+            
+        # Check if the claim value has changed
+        elif str(claim.value).lower() != str(value).lower():
+            claim = item.claims.add(prop, value)
+            break
+
+
+# Process items, create or update claims of the items 
+def process_item_claims(py_wb, object, properties, claim_list, item, exist_item):
+    # Loop through properties and add claims to item
+    for prop_label, value in object.items():
+        
+        # Format property label
+        prop_label_formatted = prop_label.replace("_", " ")
+
+        # Get the property id from the Wikibase
+        prop_id = py_wb.Property().getPropertyId(prop_label_formatted.capitalize())
+        
+        # Get the property details from the Wikibase
+        prop = py_wb.Property().get(entity_id=prop_id.capitalize())
+
+        # Create value based on data type
+        value = create_claim_value(py_wb, properties, prop_label, object)
+        
+        # If property or value doesn't exist, skip it
+        if value == None or prop == None:
+            continue
+        
+        # If item already exists and property is present in the claims, update the claim
+        if exist_item and prop_id in claim_list:
+            update_claim(item, claim, claim_list, prop, value)
+        else:
+            # If item doesn't exist or property is not in the claims, add a new claim
+            claim = item.claims.add(prop, value)
+
+        # Print details of the statement
+        print_statement_details(claim, prop_id, prop_label_formatted)
+        
+        print()
+
+# Inject the data in the wikibase
 def inject_data(py_wb, data, properties):
+    # Process properties and create or update properties in the Wikibase
     process_properties(py_wb, properties)
     
     # Loop through data and create Wikibase items with properties and values
     for object in data:
+                
         exist_item, claim_list = False, {}
         
+        # Check if item already exists in Wikibase
         if py_wb.Item().existItem(object[PROP_LABEL_NAME]):
-            item_id = py_wb.Item().getItemId(object[PROP_LABEL_NAME])
-            item = py_wb.Item().get(entity_id=item_id)
-            
+            # update the item
+            item = update_item(py_wb, object)
             exist_item = True
+            # Store existing claims of the item
             claim_list = item.claims.to_dict()
-            
-            # TODO : Test Update of description
-            description = item.description.get()
-            if ITEM_DESCRIPTION in object and object[ITEM_DESCRIPTION] != description:
-                item.Description().set(description=object[ITEM_DESCRIPTION])
-            
-        else : 
-            item = py_wb.Item().create(object[PROP_LABEL_NAME])
-            # Add a description to the item
-            if ITEM_DESCRIPTION in object:
-                item.Description().set(description=object[ITEM_DESCRIPTION])
+        else:
+            # create a new item
+            item = create_item(py_wb, object)
 
-        print(Fore.MAGENTA + "====================== ITEM ======================")
-        print(Fore.YELLOW + " |\tItem ID: " + Fore.WHITE +  item.entity_id)
-        print(Fore.YELLOW + " |\tItem Label: ", Fore.WHITE,  item.label.get())
-        print(Fore.YELLOW + " |\tItem Description: ", Fore.WHITE, item.description.get())
+        # Print details of the item
+        print_item(item)
 
-        # Loop through properties and add claims to item
-        for prop_label, value in object.items():
-            
-            prop_label_formatted = prop_label.replace("_", " ")
-            print(py_wb.Property().existProperty(prop_label_formatted.capitalize()))
-            prop_id = py_wb.Property().getPropertyId(prop_label_formatted.capitalize())
-            prop = py_wb.Property().get(entity_id=prop_id.capitalize())
+        # Process items, create or update claims of the items 
+        process_item_claims(py_wb, object, properties, claim_list, item, exist_item)
 
-            # Create value based on data type
-            value = create_claim_value(py_wb, properties, prop_label, object)
-            
-            # If property or Value doesn't exist, skip it
-            if value == None or prop == None:
-                continue
-         
-            # Update the existant claim
-            if exist_item and prop_id in claim_list:
-                for claim in claim_list[prop_id]:
-                    if claim.value.__class__.__name__ == PROP_VALUE_COORDINATE:
-                        if str(claim.value.latitude) != str(value.latitude) or str(claim.value.longitude) != str(value.longitude):
-                            claim = item.claims.add(prop, value)
-                            break
-                        
-                    elif str(claim.value).lower() != str(value).lower() :
-                        claim = item.claims.add(prop, value)
-                        break
-            else:
-                claim = item.claims.add(prop, value)
-
-            print("---------- " + Fore.BLUE + "Statements" + Fore.WHITE +" ----------")
-            print(Fore.YELLOW + " |\tClaim rank: ", Fore.WHITE, claim.rank)
-
-            print("............ " + Fore.BLUE + "Property" + Fore.WHITE + " ............")
-            print(Fore.YELLOW + " |\tProperty ID: ", Fore.WHITE, prop_id)
-            print(Fore.YELLOW + " |\tProperty Label: ", Fore.WHITE, prop_label_formatted)
-            print(Fore.YELLOW + " |\tClaim value: " , Fore.WHITE , claim.value)
-            
-            print()
-
+        break
+        
+        # Reset color to default
         print(Style.RESET_ALL)

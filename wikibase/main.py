@@ -16,7 +16,9 @@ def main(argv):
     
     # retrieve the data
     properties, data = data_clic_csv.retrieve_data(py_wb)
-    # properties, data = data_culture_api.retrieve_data(py_wb)
+    inject_data(py_wb, data, properties)
+    
+    properties, data = data_culture_api.retrieve_data(py_wb)
     inject_data(py_wb, data, properties)
     
 if __name__ == '__main__':
