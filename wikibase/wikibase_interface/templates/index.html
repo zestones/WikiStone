@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Search WikiStone</title>
+    <title>WikiStone</title>
+    <!-- <link rel="stylesheet" href="../static/css/style.css" /> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body>
-    <h1>Search WikiStone</h1>
-      <input type="text" name="query" placeholder="Search for monuments and sites of culture">
-      <button type="submit">Search</button>
-    </form>
+    <section>
+      <div class="container">
+        <div class="header">
+          <h1>WikiStone</h1>
+          <p class="catchy-phrase">Discover the world's cultural treasures</p>
+        </div>
+        <div class="search-form">
+          <form method="POST">
+          <input
+            type="text"
+            name="query"
+            placeholder="Search for monuments and sites of culture"
+          />
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      </div>
+    </section>
   </body>
 </html>
+
