@@ -42,7 +42,7 @@ mapping = {
 def retrieve_data(): 
     # Open the CSV file and read the data
     monuments = []
-    with open("../data/monuments_historiques_departement42_2023-02-11.csv", "r", encoding="utf-8") as file:
+    with open("../../data/monuments_historiques_departement42_2023-02-11.csv", "r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         for row in reader:
             # Extract the relevant data using the updated properties mapping
