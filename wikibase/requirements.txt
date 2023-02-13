@@ -1,0 +1,4 @@
+flask
+wikibase_api
+requests
+colorama
