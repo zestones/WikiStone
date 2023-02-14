@@ -3,7 +3,7 @@ function validateForm() {
     var errorMessage = document.getElementById("error-message");
 
     if (query == "") {
-        errorMessage.innerHTML = "Please enter a monument before sumitting.";
+        errorMessage.innerHTML = "Enter something before submitting.";
         errorMessage.style.display = "block";
         return false;
     }
