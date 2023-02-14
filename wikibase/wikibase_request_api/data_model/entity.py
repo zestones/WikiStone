@@ -165,6 +165,25 @@ class Item(Entity):
                 return response["search"][0]["id"]
 
         return None
+    
+    def getItemIds(self, item_label):
+        params = {
+            "action": "wbsearchentities",
+            "language": "en",
+            "format": "json",
+            "type": "item",
+            "limit": 100, # increased the limit to retrieve more results
+            "search": item_label
+        }
+
+        response = requests.get(self.py_wb.api_url, params=params).json()
+        if "success" in response and response["success"] == 1:
+            if "search" in response and len(response["search"]) > 0:
+                return response["search"]
+
+        return []
+
+
 
 
 class Property(Entity):
@@ -195,7 +214,6 @@ class Property(Entity):
         }
 
         response = requests.get(self.py_wb.api_url, params=params).json()
-
         if "success" in response and response["success"] == 1:
             if "search" in response and len(response["search"]) > 0:
                 return response["search"][0]["id"]
