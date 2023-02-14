@@ -4,16 +4,17 @@
     <title>WikiStone</title>
     <!-- <link rel="stylesheet" href="../static/css/style.css" /> -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <script rel="stylesheet" type="text/javascript" href="{{ url_for('static', filename='js/cards-animation.js') }}"> </script>
   </head>
   <body>
-    <section>
+    <section class="search-section">
       <div class="container">
         <div class="header">
           <h1>WikiStone</h1>
           <p class="catchy-phrase">Discover the world's cultural treasures</p>
         </div>
         <div class="search-form">
-          <form method="POST">
+          <form method="POST" action="/search">
           <input
             type="text"
             name="query"
@@ -24,6 +25,20 @@
       </form>
       </div>
     </section>
+    <section class="result-section">
+      {% if not data.items() %}
+      <h2 class="no-result">No data found.</h2>
+      {% endif %}
+      {% for key, value in data.items() %}
+      <div class="card animation-start">
+        <h2>{{ key }}</h2>
+        <p>{{ value['description'] }}</p>
+      </div>
+      {% endfor %}
+      {% if see_more %}
+        <button class="see-more">See More</button>
+      {% endif %}
+      <section>
   </body>
 </html>
 

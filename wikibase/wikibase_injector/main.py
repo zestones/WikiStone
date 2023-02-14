@@ -1,6 +1,6 @@
 import os
 import sys
-from colorama import Fore, Style
+from colorama import Fore
 
 # add the parent directory of main.py to Python path to enable import modules from the wikibase package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
