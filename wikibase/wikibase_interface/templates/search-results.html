@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WikiStone</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/search-results.css') }}"
+    />
+  </head>
+  <body>
+    <section class="search-section">
+      <div class="section-container">
+        <h1>WikiStone</h1>
+        <form method="POST" action="/search" onsubmit="return validateForm()">
+          <input
+            id="input-field"
+            type="text"
+            name="query"
+            placeholder="Search for monuments and sites of culture"
+          />
+          <div id="error-message"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="all-results-section">
+      {% if not data.items() and not first_render %}
+      <h2 class="no-result">No data found.</h2>
+      {% endif %} {% for key, value in data.items() %}
+      <div class="card">
+        <h2>{{ key }}</h2>
+        <p>{{ value['description'] }}</p>
+      </div>
+      {% endfor %}
+    </section>
+  </body>
+  <script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/form-validation.js') }}"
+  ></script>
+</html>

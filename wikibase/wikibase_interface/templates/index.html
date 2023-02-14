@@ -2,8 +2,11 @@
 <html>
   <head>
     <title>WikiStone</title>
-    <!-- <link rel="stylesheet" href="../static/css/style.css" /> -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
   <body>
     <section class="search-section">
@@ -14,34 +17,42 @@
         </div>
         <div class="search-form">
           <form method="POST" action="/search" onsubmit="return validateForm()">
-          <input
-            id="input-field"
-            type="text"
-            name="query"
-            placeholder="Search for monuments and sites of culture"
-          />
-          <button type="submit">Search</button>
-          <div id="error-message"></div>
+            <input
+              id="input-field"
+              type="text"
+              name="query"
+              placeholder="Search for monuments and sites of culture"
+            />
+            <button type="submit">Search</button>
+            <div id="error-message"></div>
+          </form>
         </div>
-      </form>
       </div>
     </section>
     <section class="result-section">
       {% if not data.items() and not first_render %}
       <h2 class="no-result">No data found.</h2>
-      {% endif %}
-      {% for key, value in data.items() %}
+      {% endif %} {% for key, value in data.items() %}
       <div class="card animation-start">
         <h2>{{ key }}</h2>
         <p>{{ value['description'] }}</p>
       </div>
-      {% endfor %}
-      {% if see_more %}
-        <button class="see-more">See More</button>
+      {% endfor %} {% if see_more %}
+      <button
+        class="see-more"
+        onclick="window.location.href='/all-results?query={{ query }}'"
+      >
+        See More
+      </button>
       {% endif %}
-      <section>
+    </section>
   </body>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/cards-animation.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/form-validation.js') }}"></script>
+  <script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/cards-animation.js') }}"
+  ></script>
+  <script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/form-validation.js') }}"
+  ></script>
 </html>
-

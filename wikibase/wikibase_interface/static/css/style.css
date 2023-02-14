@@ -1,8 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  height: 100vh;
   background-image: radial-gradient(circle, #55c0f2, #0077c2);
-  overflow: hidden;
   margin: 0;
 }
 
@@ -16,7 +14,6 @@ body {
 
 .container {
   width: 80%;
-
   padding: 50px;
   margin: 0 auto;
   background-color: #fff;
@@ -161,13 +158,13 @@ h1 {
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
   background-color: rgb(255, 255, 255);
 }
 
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background-color: #0077c2;
+  background-color: #55c0f2;
 }
 
 .result-section h2 {
