@@ -13,19 +13,21 @@
           <p class="catchy-phrase">Discover the world's cultural treasures</p>
         </div>
         <div class="search-form">
-          <form method="POST" action="/search">
+          <form method="POST" action="/search" onsubmit="return validateForm()">
           <input
+            id="input-field"
             type="text"
             name="query"
             placeholder="Search for monuments and sites of culture"
           />
           <button type="submit">Search</button>
+          <div id="error-message"></div>
         </div>
       </form>
       </div>
     </section>
     <section class="result-section">
-      {% if not data.items() %}
+      {% if not data.items() and not first_render %}
       <h2 class="no-result">No data found.</h2>
       {% endif %}
       {% for key, value in data.items() %}
@@ -39,6 +41,7 @@
       {% endif %}
       <section>
   </body>
-    <script type="text/javascript" href="{{ url_for('static', filename='js/cards-animation.js') }}"> </script>
+    <script type="text/javascript" href="{{ url_for('static', filename='js/cards-animation.js') }}"></script>
+    <script type="text/javascript" href="{{ url_for('static', filename='js/form-validation.js') }}"></script>
 </html>
 

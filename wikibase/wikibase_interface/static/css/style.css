@@ -3,6 +3,7 @@ body {
   height: 100vh;
   background-image: radial-gradient(circle, #55c0f2, #0077c2);
   overflow: hidden;
+  margin: 0;
 }
 
 .search-section {
@@ -79,6 +80,27 @@ h1 {
 
 .search-form button[type=submit]:active {
   background-color: #005ce6;
+}
+
+#error-message {
+  display: none;
+  font-size: 14px;
+  color: red;
+  margin-top: 10px;
+  animation-name: pop-up;
+  animation-duration: 0.5s;
+  margin-left: 15px;
+}
+
+@keyframes pop-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .result-section {
