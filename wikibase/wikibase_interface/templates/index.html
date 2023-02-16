@@ -43,29 +43,29 @@
             <div class="advanced-search">
               <button type="button" class="open-search">Advanced search</button>
               <div class="search-options">
-                <label for="city">City:</label>
-                <input
-                  type="text"
-                  name="city"
-                  id="city"
-                  placeholder="Enter city"
-                />
-                <label for="postal-code">Postal Code:</label>
-                <input
-                  type="text"
-                  name="postal-code"
-                  id="postal-code"
-                  placeholder="Enter postal code"
-                />
-                <label for="region">Region:</label>
-                <select name="region" id="region">
-                  <option value="">Select a region</option>
-                  <option value="north">North</option>
-                  <option value="south">South</option>
-                  <option value="east">East</option>
-                  <option value="west">West</option>
-                </select>
-                <button type="submit">Search</button>
+                <div class="options">
+                  <input
+                    type="text"
+                    name="city"
+                    id="city"
+                    placeholder="Enter city"
+                  />
+                  <input
+                    type="text"
+                    name="postal-code"
+                    id="postal-code"
+                    placeholder="Enter postal code"
+                  />
+                  <input
+                    type="text"
+                    name="region"
+                    id="region"
+                    placeholder="Enter a region"
+                  />
+                </div>
+                <div class="search-infos">
+                  <button type="submit">Search</button>
+                </div>
               </div>
             </div>
           </form>

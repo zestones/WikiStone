@@ -96,16 +96,17 @@ h1 {
   font-size: 16px;
   border: none;
   border-radius: 100px;
-  background-color: #0066cc;
+  background: #55c0f2;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s;
   margin-left: 20px;
+  width: 127px;
 }
 
 .search-form button[type=submit]:hover {
-  background-color: #004c99;
+  background-color: #0077c2;
 }
 
 .search-form button[type=submit]:active {
@@ -132,6 +133,28 @@ h1 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.search-form .search-options input {
+  width: 150px;
+  height: 45px;
+  border: none;
+  border-radius: 4px;
+  background: #f1f1f1;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 300;
+  color: #555;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s ease;
+  margin-right: 25px;
+}
+
+.search-form .search-options input:focus {
+  outline: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #fff;
+  color: #333;
 }
 
 .result-section {
@@ -258,6 +281,17 @@ h1 {
 
 .search-options.visible {
   display: block;
+  margin-top: 50px;
+}
+
+.search-options .options {
+  display: flex;
+}
+
+.search-infos {
+  margin-top: 24px;
+  display: flex;
+  justify-content: right;
 }
 
 .open-search {
