@@ -23,20 +23,20 @@ def main(argv):
     conf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../config.json')
     py_wb = PyWikibase(config_path=conf_path)  
     
-    # retrieve the data from the api : https://data.culture.gouv.fr/
-    print_process("API", "https://data.culture.gouv.fr/")
-    properties, data = data_culture_api.retrieve_data()
-    inject_data(py_wb, data, properties)
+    # # retrieve the data from the api : https://data.culture.gouv.fr/
+    # print_process("API", "https://data.culture.gouv.fr/")
+    # properties, data = data_culture_api.retrieve_data()
+    # inject_data(py_wb, data, properties)
     
-    # retrieve the data from the csv : https://dataclic.fr/
-    print_process("CSV", "https://dataclic.fr/")
-    properties, data = data_clic_csv.retrieve_data()
-    inject_data(py_wb, data, properties)
+    # # retrieve the data from the csv : https://dataclic.fr/
+    # print_process("CSV", "https://dataclic.fr/")
+    # properties, data = data_clic_csv.retrieve_data()
+    # inject_data(py_wb, data, properties)
     
     # retrieve the data from the web : 
     print_process("SCRAP", "https://www.loire.fr/")
-    properties, data = data_loire_web.retrieve_data()
-    inject_data(py_wb, data, properties)
+    data_loire_web.retrieve_data()
+    # inject_data(py_wb, data, properties)
     
 if __name__ == '__main__':
     main(sys.argv)

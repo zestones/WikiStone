@@ -4,6 +4,11 @@ import requests
 import json
 import re
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 # Define properties and data types
 properties = {
     PROP_NAME[LABEL]: PROP_NAME,
@@ -15,6 +20,7 @@ properties = {
     PROP_LOCATION[LABEL]: PROP_LOCATION,
     PROP_ANECDOTE[LABEL]: PROP_ANECDOTE
 }
+
 
 
 def extract_additional_infos(infos):
@@ -76,32 +82,36 @@ def scrap_data(soup):
 
     return monuments
 
-
 def retrieve_data():
-    # Send a GET request to the website
+    # Set up the Chrome driver
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    driver = webdriver.Chrome(options=options)
+
+    # Load the website
     url = "https://www.loire.fr/jcms/lw_1029499/fr/annuaire-du-patrimoine-et-monuments-de-la-loire"
-    response = requests.get(url)
+    driver.get(url)
 
-    # Parse the HTML content with BeautifulSoup
-    soup = BeautifulSoup(response.content, "html.parser")
-
-    # Find the form and the "Valider" button
-    form = soup.find(
-        "form", {"class": "formulaireRecherche zoneFormulaireGeo"})
-
-    # Get the URL of the page after clicking on the button
-    action = form.get("action")
-    data = {input.get("name"): input.get("value")
-            for input in form.find_all("input")}
+    # Find the search form and the "Valider" button
+    form = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".formulaireRecherche.zoneFormulaireGeo"))
+    )
+        
+    inputs = form.find_elements(By.CSS_SELECTOR, "input[name]")
+    data = {input.get_attribute("name"): input.get_attribute("value") for input in inputs}
     data["structureSubmit"] = "Valider"
-    response = requests.post(("https://www.loire.fr/" + action), data=data)
 
-    # Parse the HTML content of the new page
-    soup = BeautifulSoup(response.content, "html.parser")
+    # Submit the form and wait for the new page to load
+    submit_button = form.find_element(By.CSS_SELECTOR, "button[type='submit']")
+    submit_button.click()
+    WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".blocResultat.itemAnnuaire"))
+    )
 
+    # Parse the HTML content of the new page with BeautifulSoup
+    soup = BeautifulSoup(driver.page_source, "html.parser")
     monuments = scrap_data(soup)
-
-    # print(json.dumps(monuments, indent=2))
-    # print(len(monuments))
-
+    
+    # Quit the driver and return the data
+    driver.quit()
     return properties, monuments
