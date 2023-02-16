@@ -3,3 +3,4 @@ wikibase_api
 requests
 colorama
 bs4
+selenium

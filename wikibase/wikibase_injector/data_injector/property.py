@@ -8,10 +8,10 @@ def print_property(prop, title):
     print(Fore.BLUE + "|========================================|")
     print(Fore.BLUE + "| " + " " * 12 + " " + Fore.MAGENTA + title + " ")
     print(Fore.BLUE + "|" + "=" * 40 + "|")
-    print(Fore.CYAN + "| Property Id : " + Fore.WHITE + str(prop.entity_id))
-    print(Fore.CYAN + "| Label: " + Fore.WHITE + str(prop.label))
-    print(Fore.CYAN + "| Data Type : " + Fore.WHITE + str(prop.data_type))
-    print(Fore.CYAN + "| Description: " + Fore.WHITE + str(prop.description))
+    print(Fore.CYAN + "| Property Id : " + Fore.WHITE, prop.entity_id)
+    print(Fore.CYAN + "| Label: " + Fore.WHITE, prop.label)
+    print(Fore.CYAN + "| Data Type : " + Fore.WHITE, prop.data_type)
+    print(Fore.CYAN + "| Description: " + Fore.WHITE, prop.description)
     print(Fore.YELLOW + "------------------------------------------" + Style.RESET_ALL)
 
 
@@ -36,6 +36,7 @@ def update_property(py_wb, prop, prop_label, property):
 def create_property(py_wb, prop_label, property):
     if not py_wb.Property().existProperty(prop_label):
         prop = py_wb.Property().create(prop_label, data_type=property[TYPE])
+        prop.description.set(property[DESCRIPTION], language=py_wb.language)
         print_property(prop, "NEW PROPERTY")
     else:
         prop_id = py_wb.Property().getPropertyId(prop_label)

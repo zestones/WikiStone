@@ -1,13 +1,14 @@
 from wikibase_injector.data_formatter.label_properties import *
+
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+
 from bs4 import BeautifulSoup
-import requests
-import json
+import textwrap
 import re
 
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 # Define properties and data types
 properties = {
@@ -20,7 +21,6 @@ properties = {
     PROP_LOCATION[LABEL]: PROP_LOCATION,
     PROP_ANECDOTE[LABEL]: PROP_ANECDOTE
 }
-
 
 
 def extract_additional_infos(infos):
@@ -70,17 +70,27 @@ def scrap_data(soup):
         details, comprendre, anecdote = extract_additional_infos(infos)
 
         monument[PROP_NAME[LABEL]] = title
-        monument[PROP_ADDRESS[LABEL]] = address
-        monument[PROP_CITY[LABEL]] = city
-        monument[PROP_POSTCODE[LABEL]] = postal_code
-        monument[PROP_DEPARTEMENT[LABEL]] = "Auvergne-Rhône-Alpes"
-        monument[PROP_PRECISION_ON_PROTECTION[LABEL]] = details
-        monument[ITEM_DESCRIPTION] = comprendre
-        monument[PROP_ANECDOTE[LABEL]] = anecdote
+
+        # Don't add empty data
+        if address:
+            monument[PROP_ADDRESS[LABEL]] = address
+        if city:
+            monument[PROP_CITY[LABEL]] = city
+        if postal_code:
+            monument[PROP_POSTCODE[LABEL]] = postal_code
+        if details:
+            if len(details) > 250:
+                monument[PROP_PRECISION_ON_PROTECTION[LABEL]] = textwrap.wrap(details, width=400)[0]
+        if comprendre:
+            if len(comprendre) > 250:
+                monument[ITEM_DESCRIPTION] = textwrap.wrap(comprendre, width=250)[0]
+        if anecdote:
+            monument[PROP_ANECDOTE[LABEL]] = anecdote
 
         monuments.append(monument)
 
     return monuments
+
 
 def retrieve_data():
     # Set up the Chrome driver
@@ -94,24 +104,27 @@ def retrieve_data():
 
     # Find the search form and the "Valider" button
     form = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, ".formulaireRecherche.zoneFormulaireGeo"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ".formulaireRecherche.zoneFormulaireGeo"))
     )
-        
+
     inputs = form.find_elements(By.CSS_SELECTOR, "input[name]")
-    data = {input.get_attribute("name"): input.get_attribute("value") for input in inputs}
+    data = {input.get_attribute("name"): input.get_attribute(
+        "value") for input in inputs}
     data["structureSubmit"] = "Valider"
 
     # Submit the form and wait for the new page to load
     submit_button = form.find_element(By.CSS_SELECTOR, "button[type='submit']")
     submit_button.click()
     WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, ".blocResultat.itemAnnuaire"))
+        EC.presence_of_element_located(
+            (By.CSS_SELECTOR, ".blocResultat.itemAnnuaire"))
     )
 
     # Parse the HTML content of the new page with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, "html.parser")
     monuments = scrap_data(soup)
-    
+
     # Quit the driver and return the data
     driver.quit()
     return properties, monuments
