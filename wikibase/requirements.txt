@@ -2,3 +2,4 @@ flask
 wikibase_api
 requests
 colorama
+bs4
