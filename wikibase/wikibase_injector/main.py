@@ -9,7 +9,7 @@ from wikibase_request_api.python_wikibase import PyWikibase
 from wikibase_injector.data_injector.wiki_injector import inject_data
 import wikibase_injector.data_formatter.data_culture_api as data_culture_api
 import wikibase_injector.data_formatter.data_clic_csv as data_clic_csv
-
+import wikibase_injector.data_formatter.data_loire_web as data_loire_web
 
 def print_process(title, source):
     print(Fore.RED + "+" * 75)
@@ -31,6 +31,11 @@ def main(argv):
     # retrieve the data from the csv : https://dataclic.fr/
     print_process("CSV", "https://dataclic.fr/")
     properties, data = data_clic_csv.retrieve_data()
+    inject_data(py_wb, data, properties)
+    
+    # retrieve the data from the web : 
+    print_process("SCRAP", "https://www.loire.fr/")
+    properties, data = data_loire_web.retrieve_data()
     inject_data(py_wb, data, properties)
     
 if __name__ == '__main__':
