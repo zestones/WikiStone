@@ -102,3 +102,9 @@ PROP_WEBSITE = {
     TYPE: TYPE_URL,
     DESCRIPTION: "Site web pour obtenir plus d'informations sur un bien culturel, patrimoine, monument, musée, œuvre d'art, etc.",
 }
+
+PROP_ANECDOTE = {
+    LABEL: "anecdote",
+    TYPE: TYPE_STRING,
+    DESCRIPTION: "Récit d'un détail historique, d'un petit fait curieux."
+}

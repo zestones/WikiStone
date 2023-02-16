@@ -2,7 +2,6 @@ from wikibase_injector.data_formatter.label_properties import *
 import textwrap
 import csv
 
-import json
 # The proprties name and value
 properties = {
     PROP_POSTCODE[LABEL]: PROP_POSTCODE,
