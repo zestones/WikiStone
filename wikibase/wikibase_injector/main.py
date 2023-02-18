@@ -28,15 +28,15 @@ def main(argv):
     properties, data = data_culture_api.retrieve_data()
     inject_data(py_wb, data, properties)
     
-    # retrieve the data from the csv : https://dataclic.fr/
-    print_process("CSV", "https://dataclic.fr/")
-    properties, data = data_clic_csv.retrieve_data()
-    inject_data(py_wb, data, properties)
+    # # retrieve the data from the csv : https://dataclic.fr/
+    # print_process("CSV", "https://dataclic.fr/")
+    # properties, data = data_clic_csv.retrieve_data()
+    # inject_data(py_wb, data, properties)
     
-    # retrieve the data from the web : 
-    print_process("SCRAP", "https://www.loire.fr/")
-    properties, data = data_loire_web.retrieve_data()
-    inject_data(py_wb, data, properties)
+    # # retrieve the data from the web : 
+    # print_process("SCRAP", "https://www.loire.fr/")
+    # properties, data = data_loire_web.retrieve_data()
+    # inject_data(py_wb, data, properties)
     
 if __name__ == '__main__':
     main(sys.argv)

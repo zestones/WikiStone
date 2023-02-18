@@ -16,7 +16,7 @@
           <p class="catchy-phrase">Discover the world's cultural treasures</p>
         </div>
         <div class="search-form">
-          <form method="POST" action="/search" onsubmit="return validateForm()">
+          <form onsubmit="return validateForm()">
             <div class="input-container">
               <div class="icon-wrap">
                 <button class="icon-btn">
@@ -97,5 +97,9 @@
   <script
     type="text/javascript"
     src="{{ url_for('static', filename='js/form-validation.js') }}"
+  ></script>
+  <script
+    type="text/javascript"
+    src="{{ url_for('static', filename='js/wiki-sparql-search.js') }}"
   ></script>
 </html>

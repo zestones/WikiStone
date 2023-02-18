@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import sys
 import os
+import json
 
 # add the parent directory of main.py to Python path to enable import modules from the wikibase package.
 sys.path.insert(0, os.path.abspath(
@@ -35,13 +36,20 @@ def parse_query(items):
 
     return parsed_items
 
+
 @app.route('/search', methods=['POST'])
 def search():
 
     query = request.form['query']
-    raw_data = py_wb.Item().getItemIds(query)
+    print("====>", query)
+    # raw_data = py_wb.Item().getItemIds(query)
+    # parsed_data = parse_query(raw_data)
+    
+    raw_data = py_wb.api.entity.search(search_key=query, language=py_wb.language)
     parsed_data = parse_query(raw_data)
-
+    
+    print(raw_data)
+    
     if len(parsed_data) > 7:
         trimmed_data = dict(list(parsed_data.items())[:7])
         return render_template('index.html', data=trimmed_data, see_more=(len(parsed_data) > 7), query=query)

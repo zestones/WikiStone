@@ -4,7 +4,7 @@ from wikibase_request_api.utils.exceptions import EditError, NotFoundError, Sear
 from wikibase_request_api.value import Value
 
 import requests
-
+import json
 
 class Entity(Value):
     def __init__(self, py_wb, api, language, entity_type):
@@ -177,6 +177,7 @@ class Item(Entity):
         }
 
         response = requests.get(self.py_wb.api_url, params=params).json()
+        print(json.dumps(response, indent=2))
         if "success" in response and response["success"] == 1:
             if "search" in response and len(response["search"]) > 0:
                 return response["search"]

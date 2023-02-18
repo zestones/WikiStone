@@ -6,7 +6,7 @@ install:
 # Run the Flask app
 .PHONY: wikistone
 wikistone:
-	flask --app wikibase_interface/main.py --debug run
+	flask --app wikibase_interface/main.py --debug run -h localhost -p 6060
 
 # Run the wiki_injector script
 .PHONY: inject
