@@ -16,7 +16,7 @@
           <p class="catchy-phrase">Discover the world's cultural treasures</p>
         </div>
         <div class="search-form">
-          <form onsubmit="return validateForm()">
+          <form>
             <div class="input-container">
               <div class="icon-wrap">
                 <button class="icon-btn">
@@ -72,31 +72,11 @@
         </div>
       </div>
     </section>
-    <section class="result-section">
-      {% if not data.items() and not first_render %}
-      <h2 class="no-result">No data found.</h2>
-      {% endif %} {% for key, value in data.items() %}
-      <div class="card animation-start">
-        <h2>{{ key }}</h2>
-        <p>{{ value['description'] }}</p>
-      </div>
-      {% endfor %} {% if see_more %}
-      <button
-        class="see-more"
-        onclick="window.location.href='/all-results?query={{ query }}'"
-      >
-        See More
-      </button>
-      {% endif %}
-    </section>
+    <section class="result-section"></section>
   </body>
   <script
     type="text/javascript"
-    src="{{ url_for('static', filename='js/cards-animation.js') }}"
-  ></script>
-  <script
-    type="text/javascript"
-    src="{{ url_for('static', filename='js/form-validation.js') }}"
+    src="{{ url_for('static', filename='js/advanced-search-form.js') }}"
   ></script>
   <script
     type="text/javascript"
