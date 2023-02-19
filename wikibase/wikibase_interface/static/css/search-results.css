@@ -5,7 +5,15 @@
     border-radius: 10px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     padding: 35px;
-    padding-bottom: 45px;
+}
+
+h1 {
+    display: inline-block;
+}
+
+h1:hover {
+    cursor: pointer;
+    color: #55c0f2;
 }
 
 input[type="text"] {
