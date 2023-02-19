@@ -108,6 +108,13 @@ function displaySearch(results) {
             seeMoreBtn.textContent = 'See More';
             seeMoreBtn.classList.add('see-more');
             resultSection.appendChild(seeMoreBtn);
+
+            // And an EventListener
+            seeMoreBtn.addEventListener('click', () => {
+                const searchParams = new URLSearchParams();
+                searchParams.set('results', JSON.stringify(results));
+                window.location.href = '/all-results?' + searchParams.toString();
+            });
         }
     }
 

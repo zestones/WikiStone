@@ -37,30 +37,17 @@ def parse_query(items):
     return parsed_items
 
 
-@app.route('/search', methods=['POST'])
-def search():
-
-    query = request.form['query']
-    print("====>", query)
-    # raw_data = py_wb.Item().getItemIds(query)
-    # parsed_data = parse_query(raw_data)
-    
-    raw_data = py_wb.api.entity.search(search_key=query, language=py_wb.language)
-    parsed_data = parse_query(raw_data)
-    
-    print(raw_data)
-    
-    if len(parsed_data) > 7:
-        trimmed_data = dict(list(parsed_data.items())[:7])
-        return render_template('index.html', data=trimmed_data, see_more=(len(parsed_data) > 7), query=query)
-
-    return render_template('index.html', data=parsed_data, see_more=(len(parsed_data) > 7), query=query)
-
 @app.route('/all-results', methods=['GET'])
 def see_more():
+
+    data = json.loads(request.args.get('results'))
+    print(json.dumps(data, indent=2))
+    formatted_data = {}
+
+    for _, value in data.items():
+        label_value = value['label']
+        formatted_data[label_value] = value
+
+    print(formatted_data)
     
-    query = request.args.get('query')
-    raw_data = py_wb.Item().getItemIds(query)
-    parsed_data = parse_query(raw_data)
-    
-    return render_template('search-results.html', data=parsed_data)
+    return render_template('search-results.html', data=formatted_data)
