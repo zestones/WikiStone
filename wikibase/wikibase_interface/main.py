@@ -22,6 +22,17 @@ def index():
 @app.route('/all-results', methods=['GET'])
 def see_more():
 
-    data = json.loads(request.args.get('results'))
     
-    return render_template('search-results.html', data=data)
+    data = json.loads(request.args.get('results'))
+    tmp = (request.args.get('results'))
+    items_per_page = request.args.get('items_per_page', default=5, type=int)
+    page = request.args.get('page', default=1, type=int)
+
+    # Determine the range of items to display on the current page
+    start_index = (page - 1) * items_per_page
+    end_index = start_index + items_per_page
+
+    # Slice the data to get only the items for the current page
+    data_page = list(data.items())[start_index:end_index]
+
+    return render_template('search-results.html', data=data_page, page=page, items_per_page=items_per_page, results=tmp)
