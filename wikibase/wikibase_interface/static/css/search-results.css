@@ -16,27 +16,6 @@ h1:hover {
     color: #55c0f2;
 }
 
-input[type="text"] {
-    width: 55%;
-    height: 45px;
-    border: none;
-    border-radius: 4px;
-    background: #f1f1f1;
-    padding: 0 20px;
-    font-size: 16px;
-    font-weight: 300;
-    color: #555;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    transition: all 0.3s ease;
-}
-
-input[type="text"]:focus {
-    outline: none;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    background: #fff;
-    color: #333;
-}
-
 .all-results-section {
     width: 90%;
     height: auto;
@@ -59,8 +38,6 @@ input[type="text"]:focus {
 
     padding-left: 22px;
     margin: 0 auto;
-
-    /* border-bottom: 1px solid #55c0f2; */
 }
 
 .all-results-section .card:hover {
@@ -71,4 +48,31 @@ input[type="text"]:focus {
     box-shadow: 5px 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     border: none;
     cursor: pointer;
+}
+
+.pagination-section {
+    height: 44px;
+    width: 65%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.pagination-section .pagination a {
+    margin: 5px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+
+.pagination-section .pagination a.active {
+    color: #005ce6;
+}
+
+.pagination-section .pagination a:hover {
+    color: #55c0f2;
 }
