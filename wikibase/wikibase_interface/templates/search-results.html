@@ -24,7 +24,7 @@
     <section class="all-results-section">
       {% if not data and not first_render %}
       <h2 class="no-result">No data found.</h2>
-      {% endif %} {% for key, value in data.items() %}
+      {% endif %} {% for key, value in data %}
       <div class="card">
         <h2>{{ value['label'] }}</h2>
         {% if 'description' in value %}
@@ -32,6 +32,32 @@
         {% endif %}
       </div>
       {% endfor %}
+    </section>
+    <section class="pagination-section">
+      <div class="pagination">
+        {% if page > 1 %}
+        <a
+          href="?page={{ page - 1 }}&items_per_page={{ items_per_page }}&results={{results}}"
+          >Previous</a
+        >
+        {% endif %} {% for i in range(1, num_pages + 1) %} {% if i == page %}
+        <a
+          href="?page={{ i }}&items_per_page={{ items_per_page }}&results={{results}}"
+          class="active"
+          >{{ i }}</a
+        >
+        {% else %}
+        <a
+          href="?page={{ i }}&items_per_page={{ items_per_page }}&results={{results}}"
+          >{{ i }}</a
+        >
+        {% endif %} {% endfor %} {% if page < num_pages %}
+        <a
+          href="?page={{ page + 1 }}&items_per_page={{ items_per_page }}&results={{results}}"
+          >Next</a
+        >
+        {% endif %}
+      </div>
     </section>
   </body>
 </html>
