@@ -84,7 +84,7 @@ def main(argv):
         elif opt in ('-c', '--csv'):
             process_csv_data(py_wb)
         
-        elif opt in ('-s', '--scrap'):
+        elif opt in ('-s', '--scrapp'):
             process_web_data(py_wb)
         
     
