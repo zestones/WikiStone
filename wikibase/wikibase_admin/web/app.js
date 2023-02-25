@@ -15,22 +15,22 @@ links.forEach(link => {
 });
 
 
-const pageTitles = {
-    'Home': 'Home',
-    'Source': 'Document',
-    'Property': 'Property',
-    'Settings': 'Settings'
-};
+// const pageTitles = {
+//     'Home': 'Home',
+//     'Source': 'Document',
+//     'Property': 'Property',
+//     'Settings': 'Settings'
+// };
 
-const sidebar = document.querySelector('.sidebar');
-const pageTitlesElement = document.querySelector('.page-title');
+// const sidebar = document.querySelector('.sidebar');
+// const pageTitlesElement = document.querySelector('.page-title');
 
-sidebar.addEventListener('click', (event) => {
-    event.preventDefault();
+// sidebar.addEventListener('click', (event) => {
+//     event.preventDefault();
 
-    const activeElement = document.querySelector('.sidebar li.active');
-    const title = activeElement.dataset.title;
+//     const activeElement = document.querySelector('.sidebar li.active');
+//     const title = activeElement.dataset.title;
 
-    // Update the page title
-    pageTitlesElement.textContent = pageTitles[title];
-});
+//     // Update the page title
+//     pageTitlesElement.textContent = pageTitles[title];
+// });

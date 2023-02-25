@@ -23,7 +23,7 @@
   <body>
     <nav class="sidebar">
       <ul>
-        <li class="active" data-title="Home">
+        <li class="active" data-title="Home" id="home-tab">
           <a href="#">
             <i class="fas fa-home"></i>
           </a>
@@ -49,11 +49,15 @@
     <main>
       <h1 class="page-title">Home</h1>
       <!-- Your page content here -->
+      <div class="page-content" id="home">
+        <!-- Contenu chargé dynamiquement à partir de components/home.html -->
+      </div>
     </main>
     <!-- Include eel.js -->
     <script type="text/javascript" src="/eel.js"></script>
 
     <!-- Include custom JavaScript file -->
     <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="./components/home.js"></script>
   </body>
 </html>
