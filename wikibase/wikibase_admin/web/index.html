@@ -1,19 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Hello World</title>
+  <head>
+    <title>Wiki Administrator</title>
+
+    <!-- Include Bootstrap CSS file -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <!-- Include Font Awesome CSS file -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <!-- Include custom CSS file -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="sidebar">
+      <ul>
+        <li class="active" data-title="Home">
+          <a href="#">
+            <i class="fas fa-home"></i>
+          </a>
+        </li>
+        <li data-title="Source">
+          <a href="#">
+            <i class="fas fa-file-alt"></i>
+          </a>
+        </li>
+        <li data-title="Property">
+          <a href="#">
+            <i class="fas fa-network-wired"></i>
+          </a>
+        </li>
+        <li class="settings" data-title="Settings">
+          <a href="#">
+            <i class="fas fa-cog"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <main>
+      <h1 class="page-title">Home</h1>
+      <!-- Your page content here -->
+    </main>
+    <!-- Include eel.js -->
     <script type="text/javascript" src="/eel.js"></script>
-    <script type="text/javascript">
-        async function sayHello() {
-            const result = await eel.say_hello()();
-            document.getElementById("output").innerHTML = result;
-        }
-    </script>
-</head>
-<body>
-    <h1>Hello World</h1>
-    <button onclick="sayHello()">Say Hello</button>
-    <p id="output"></p>
-</body>
+
+    <!-- Include custom JavaScript file -->
+    <script type="text/javascript" src="app.js"></script>
+  </body>
 </html>
