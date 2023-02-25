@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript">
+        async function sayHello() {
+            const result = await eel.say_hello()();
+            document.getElementById("output").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <h1>Hello World</h1>
+    <button onclick="sayHello()">Say Hello</button>
+    <p id="output"></p>
+</body>
+</html>

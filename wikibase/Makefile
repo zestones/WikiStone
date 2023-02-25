@@ -8,6 +8,11 @@ install:
 wikistone:
 	flask --app wikibase_interface/main.py --debug run -h localhost -p 6060
 
+# Run the electron app
+.PHONY: electron
+electron:
+	npm --prefix wikibase_admin start
+
 # Run the wiki_injector script with arguments
 .PHONY: inject
 inject:
