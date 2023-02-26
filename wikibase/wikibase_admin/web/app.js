@@ -47,20 +47,20 @@ loaders.forEach(loader => loader.loadComponent());
 console.log(loaders)
 
 function hideAllComponents() {
-  components.forEach(component => component.style.display = 'none');
+    components.forEach(component => component.style.display = 'none');
 }
 
 function showComponent(component) {
-  component.style.display = 'block';
+    component.style.display = 'block';
 }
 
 function onTabClick(tabIndex) {
-  hideAllComponents();
-  showComponent(components[tabIndex]);
+    hideAllComponents();
+    showComponent(components[tabIndex]);
 }
 
 tabsElements.forEach((tab, index) => {
-  tab.addEventListener('click', () => onTabClick(index));
+    tab.addEventListener('click', () => onTabClick(index));
 });
 
 // Load the home component by default
