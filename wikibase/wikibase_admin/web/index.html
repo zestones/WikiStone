@@ -63,7 +63,10 @@
       type="text/javascript"
       src="./components/sidenav/sidenav.js"
     ></script>
-    <script type="module" src="components/home/home.js"></script>
     <script type="text/javascript" src="components/source/source.js"></script>
+    <script type="module">
+      import { changePage } from "./components/home/home.js";
+      window.changePage = changePage;
+    </script>
   </body>
 </html>

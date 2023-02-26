@@ -1,17 +1,15 @@
 import { components, loaders } from '../../App.js';
 
-loaders.forEach(loader => {
-    loader.loadComponent().then(() => {
-        const tabLink = document.querySelector(`#${loader.elementId}-tab a`);
-        const btn = document.querySelector(`#${loader.elementId}-btn`);
-
-        if (tabLink && btn) {
-            btn.addEventListener('click', () => {
+export function changePage(button) {
+    loaders.forEach(loader => {
+        if (loader.elementId === button.id.replace('-btn', '')) {
+            const tabLink = document.querySelector(`#${loader.elementId}-tab a`);
+            if (tabLink) {
                 tabLink.dispatchEvent(new MouseEvent('click'));
                 loader.hideComponents(components);
-            });
-        } else {
-            console.warn(`Could not find element(s) for ${loader.elementId} component`);
+            } else {
+                console.warn(`Could not find element for ${loader.elementId} component`);
+            }
         }
     });
-});
+}

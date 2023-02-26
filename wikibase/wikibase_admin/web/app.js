@@ -26,6 +26,7 @@ class ComponentLoader {
         });
     }
 }
+
 const tabs = [
     { id: 'home', path: 'components/home/home.html', tabId: 'home-tab' },
     { id: 'source', path: 'components/source/source.html', tabId: 'source-tab' },
