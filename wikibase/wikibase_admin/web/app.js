@@ -4,33 +4,64 @@ function say_hello_js(x) {
     console.log("Hello from " + x);
 }
 
+class ComponentLoader {
+    constructor(elementId, componentPath) {
+        this.element = document.getElementById(elementId);
+        this.componentPath = componentPath;
+        this.elementId = elementId;
+        this.element.style.display = 'none';
+    }
 
-const links = document.querySelectorAll('.sidebar li a');
+    loadComponent() {
+        return fetch(this.componentPath)
+            .then(response => response.text())
+            .then(data => {
+                this.element.innerHTML = data;
+            })
+            .catch(error => console.error(error));
+    }
 
-links.forEach(link => {
-    link.addEventListener('click', () => {
-        links.forEach(otherLink => otherLink.parentElement.classList.remove('active'));
-        link.parentElement.classList.add('active');
-    });
+    hideComponents(elements) {
+        elements.forEach(element => {
+            if (element.id == this.elementId) {
+                element.style.display = 'block';
+            }
+            else {
+                element.style.display = 'none';
+            }
+        });
+    }
+}
+const tabs = [
+    { id: 'home', path: 'components/home/home.html', tabId: 'home-tab' },
+    { id: 'source', path: 'components/source/source.html', tabId: 'source-tab' },
+    { id: 'property', path: 'components/property/property.html', tabId: 'property-tab' },
+    { id: 'settings', path: 'components/settings/settings.html', tabId: 'settings-tab' }
+];
+
+export const components = tabs.map(tab => document.getElementById(tab.id));
+export const loaders = tabs.map(tab => new ComponentLoader(tab.id, tab.path));
+export const tabsElements = tabs.map(tab => document.querySelector(`#${tab.tabId}`));
+
+loaders.forEach(loader => loader.loadComponent());
+console.log(loaders)
+
+function hideAllComponents() {
+  components.forEach(component => component.style.display = 'none');
+}
+
+function showComponent(component) {
+  component.style.display = 'block';
+}
+
+function onTabClick(tabIndex) {
+  hideAllComponents();
+  showComponent(components[tabIndex]);
+}
+
+tabsElements.forEach((tab, index) => {
+  tab.addEventListener('click', () => onTabClick(index));
 });
 
-
-// const pageTitles = {
-//     'Home': 'Home',
-//     'Source': 'Document',
-//     'Property': 'Property',
-//     'Settings': 'Settings'
-// };
-
-// const sidebar = document.querySelector('.sidebar');
-// const pageTitlesElement = document.querySelector('.page-title');
-
-// sidebar.addEventListener('click', (event) => {
-//     event.preventDefault();
-
-//     const activeElement = document.querySelector('.sidebar li.active');
-//     const title = activeElement.dataset.title;
-
-//     // Update the page title
-//     pageTitlesElement.textContent = pageTitles[title];
-// });
+// Load the home component by default
+showComponent(components[0]);

@@ -4,12 +4,14 @@ import sys
 # Set web files folder
 eel.init('web')
 
-@eel.expose                         # Expose this function to Javascript
+# Expose this function to Javascript
+@eel.expose                         
 def say_hello_py(x):
     print('Hello from %s' % x)
 
 say_hello_py('Python World!')
-eel.say_hello_js('Python World!')   # Call a Javascript function
+# Call a Javascript function
+eel.say_hello_js('Python World!')   
 
 
 def main(argv):
