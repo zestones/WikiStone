@@ -1,7 +1,7 @@
 .sources-container {
     display: flex;
     flex-wrap: wrap;
-    
+
     justify-content: space-evenly;
 }
 
@@ -36,18 +36,17 @@
 
     display: flex;
     justify-content: center;
-    
+
     align-items: center;
     text-align: center;
-    
+
     flex-grow: 1;
 }
 
 .sources-container .source .footer {
-    text-align: right;
     position: absolute;
     bottom: 15px;
-    right: 15px;
+    right: 12px;
 }
 
 .sources-container .source .footer button {
@@ -56,4 +55,30 @@
     background: transparent;
     color: #007bff;
     cursor: pointer;
+}
+
+.processing-animation {
+    position: relative;
+    top: 10px;
+}
+
+.processing-animation::after {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 4px solid #ccc;
+    border-color: #ccc transparent #ccc transparent;
+    animation: processing 1.2s linear infinite;
+}
+
+@keyframes processing {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

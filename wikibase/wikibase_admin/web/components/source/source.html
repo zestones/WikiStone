@@ -18,7 +18,8 @@
             Inject/Update the csv source by clicking on the Update Button.
           </div>
           <div class="footer">
-            <button>Update</button>
+            <button onclick="processData(this)" id="csv-btn">Update</button>
+            <div class="processing csv" style="display: none"></div>
           </div>
         </div>
 
@@ -30,7 +31,8 @@
             Inject/Update the json source by clicking on the Update Button.
           </div>
           <div class="footer">
-            <button>Update</button>
+            <button onclick="processData(this)" id="json-btn">Update</button>
+            <div class="processing json" style="display: none"></div>
           </div>
         </div>
 
@@ -42,7 +44,8 @@
             Inject/Update the web source by clicking on the Update Button.
           </div>
           <div class="footer">
-            <button>Update</button>
+            <button onclick="processData(this)" id="web-btn">Update</button>
+            <div class="processing web" style="display: none"></div>
           </div>
         </div>
       </div>

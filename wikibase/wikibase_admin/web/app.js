@@ -1,9 +1,3 @@
-// Expose functions to Python
-eel.expose(say_hello_js);
-function say_hello_js(x) {
-    console.log("Hello from " + x);
-}
-
 class ComponentLoader {
     constructor(elementId, componentPath) {
         this.element = document.getElementById(elementId);
@@ -44,7 +38,6 @@ export const loaders = tabs.map(tab => new ComponentLoader(tab.id, tab.path));
 export const tabsElements = tabs.map(tab => document.querySelector(`#${tab.tabId}`));
 
 loaders.forEach(loader => loader.loadComponent());
-console.log(loaders)
 
 function hideAllComponents() {
     components.forEach(component => component.style.display = 'none');
