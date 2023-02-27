@@ -26,8 +26,9 @@ def usage(program_name):
     print("")
     
     print(Style.BRIGHT + Fore.BLUE + "Options:" + Style.RESET_ALL)
-    print(f"  {Fore.CYAN}-w, --web{Style.RESET_ALL}\tProcess data from web only")
-    print(f"  {Fore.CYAN}-a, --app{Style.RESET_ALL}\tProcess data from app only")
+    print(f"  {Fore.CYAN}-h, --help{Style.RESET_ALL}\t\tShow this help message and exit")
+    print(f"  {Fore.CYAN}-w, --web{Style.RESET_ALL}\tRun the web application")
+    print(f"  {Fore.CYAN}-a, --app{Style.RESET_ALL}\tRun the desktop application")
     
     print("")
     sys.exit(1)
@@ -61,4 +62,4 @@ def main(argv):
         usage(argv[0])
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main(sys.argv)
