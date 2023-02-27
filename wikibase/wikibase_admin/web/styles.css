@@ -1,0 +1,21 @@
+body {
+    background-color: #1e1e1e;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    height: 100vh;
+}
+
+h1 {
+    margin: 15px;
+}
+
+.main-content {
+    margin-left: calc(16px + 54px);
+    position: relative;
+    color: white;
+    padding: 22px;
+    height: 100%;
+}
+
+.page-content {
+    margin-top: 30px;
+}

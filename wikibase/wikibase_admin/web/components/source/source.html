@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="components/source/source.css" />
+  </head>
+  <body>
+    <div class="page-content" id="source">
+      <h1>Source</h1>
+      <div class="sources-container">
+        <div class="source">
+          <div class="header">
+            <img src="../../resource/icon-csv.png" alt="icon csv" />
+          </div>
+          <div class="details">
+            Inject/Update the csv source by clicking on the Update Button.
+          </div>
+          <div class="footer">
+            <button onclick="processData(this)" id="csv-btn">Update</button>
+            <div class="processing csv" style="display: none"></div>
+          </div>
+        </div>
+
+        <div class="source">
+          <div class="header">
+            <img src="../../resource/icon-json.png" alt="icon json" />
+          </div>
+          <div class="details">
+            Inject/Update the json source by clicking on the Update Button.
+          </div>
+          <div class="footer">
+            <button onclick="processData(this)" id="json-btn">Update</button>
+            <div class="processing json" style="display: none"></div>
+          </div>
+        </div>
+
+        <div class="source">
+          <div class="header">
+            <img src="../../resource/icon-web.png" alt="icon web" />
+          </div>
+          <div class="details">
+            Inject/Update the web source by clicking on the Update Button.
+          </div>
+          <div class="footer">
+            <button onclick="processData(this)" id="web-btn">Update</button>
+            <div class="processing web" style="display: none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

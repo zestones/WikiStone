@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wiki Administrator</title>
+
+    <!-- Include Bootstrap CSS file -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <!-- Include Font Awesome CSS file -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <!-- Include custom CSS file -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="components/sidenav/sidenav.css" />
+    <link rel="stylesheet" href="components/titlebar/titlebar.css" />
+  </head>
+  <body>
+    <div class="title-bar">
+      <div class="title-bar__title">Wikistone Administrator</div>
+    </div>
+
+    <nav class="sidebar">
+      <ul>
+        <li class="active" data-title="Home" id="home-tab">
+          <a href="#">
+            <i class="fas fa-home"></i>
+          </a>
+        </li>
+        <li data-title="Source" id="source-tab">
+          <a href="#">
+            <i class="fas fa-file-alt"></i>
+          </a>
+        </li>
+        <li data-title="Property" id="property-tab">
+          <a href="#">
+            <i class="fas fa-network-wired"></i>
+          </a>
+        </li>
+        <li class="settings" data-title="Settings" id="settings-tab">
+          <a href="#">
+            <i class="fas fa-cog"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="main-content">
+      <div class="page-content" id="home"></div>
+      <div class="page-content" id="source"></div>
+      <div class="page-content" id="property"></div>
+      <div class="page-content" id="settings"></div>
+    </section>
+
+    <!-- Include eel.js -->
+    <script type="text/javascript" src="/eel.js"></script>
+
+    <!-- Include custom JavaScript file -->
+    <script type="module" src="App.js"></script>
+    <script
+      type="text/javascript"
+      src="./components/sidenav/sidenav.js"
+    ></script>
+    <script type="text/javascript" src="components/source/source.js"></script>
+    <script type="module">
+      import { changePage } from "./components/home/home.js";
+      window.changePage = changePage;
+    </script>
+  </body>
+</html>
