@@ -20,7 +20,7 @@ function createLoadingScreen() {
   });
 
   // and load the loading.html file.
-  loadingScreen.loadFile('loading.html');
+  loadingScreen.loadFile('./web/components/loading/loading.html');
 
   // Show the loading screen window.
   loadingScreen.show();
