@@ -26,7 +26,7 @@ def usage(program_name):
     print("")
     
     print(Style.BRIGHT + Fore.BLUE + "Options:" + Style.RESET_ALL)
-    print(f"  {Fore.CYAN}-h, --help{Style.RESET_ALL}\t\tShow this help message and exit")
+    print(f"  {Fore.CYAN}-h, --help{Style.RESET_ALL}\tShow this help message and exit")
     print(f"  {Fore.CYAN}-w, --web{Style.RESET_ALL}\tRun the web application")
     print(f"  {Fore.CYAN}-a, --app{Style.RESET_ALL}\tRun the desktop application")
     

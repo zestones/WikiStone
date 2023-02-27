@@ -1,0 +1,129 @@
+body {
+    background-color: #2f3241;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    border-radius: 25px;
+}
+
+h1 {
+    margin-top: 50px;
+    font-size: 32px;
+    animation: color-change 2s linear infinite;
+}
+
+@keyframes color-change {
+    0% {
+        color: #fff;
+    }
+
+    50% {
+        color: cyan;
+    }
+
+    100% {
+        color: #fff;
+    }
+}
+
+
+.dot {
+    display: inline-block;
+    animation: jump 1s ease-in-out infinite;
+    transform-origin: center bottom;
+}
+
+.dot-1 {
+    animation-delay: 0s;
+}
+
+.dot-2 {
+    animation-delay: 0.33s;
+}
+
+.dot-3 {
+    animation-delay: 0.66s;
+}
+
+@keyframes jump {
+
+    0%,
+    50%,
+    100% {
+        transform: translateY(0);
+    }
+
+    25% {
+        transform: translateY(-10px);
+    }
+
+    75% {
+        transform: translateY(-5px);
+    }
+}
+
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wave {
+    width: 5px;
+    height: 100px;
+    background: linear-gradient(45deg, cyan, #fff);
+    margin: 10px;
+    animation: wave 1s linear infinite;
+    border-radius: 20px;
+}
+
+.wave:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.wave:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.wave:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.wave:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.wave:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.wave:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.wave:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+.wave:nth-child(9) {
+    animation-delay: 0.8s;
+}
+
+.wave:nth-child(10) {
+    animation-delay: 0.9s;
+}
+
+@keyframes wave {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(0);
+    }
+}
