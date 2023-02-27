@@ -20,8 +20,29 @@
     <!-- Include custom CSS file -->
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="components/sidenav/sidenav.css" />
+
+    <style>
+      /* Style your custom title bar */
+      .title-bar {
+        position: fixed;
+        width: 100%;
+        height: 30px;
+        top: 0;
+        z-index: 1;
+        background-color: #2f3241;
+        color: white;
+        padding: 0 20px;
+        display: flex;
+        -webkit-app-region: drag;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
+    <div class="title-bar">
+      <div class="title-bar__title">Wiki Admin</div>
+    </div>
+
     <nav class="sidebar">
       <ul>
         <li class="active" data-title="Home" id="home-tab">
@@ -67,6 +88,12 @@
     <script type="module">
       import { changePage } from "./components/home/home.js";
       window.changePage = changePage;
+    </script>
+    <script>
+      function closeWindow() {
+        // send away!
+        ipcRenderer.send("close-me");
+      }
     </script>
   </body>
 </html>
