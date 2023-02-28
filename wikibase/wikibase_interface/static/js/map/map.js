@@ -23,7 +23,9 @@ function parseData(rawData) {
     rawData.results.bindings.forEach(binding => {
         const itemUri = binding.item.value.split('/').pop(); // Get the item ID from the URI
         const label = binding.itemLabel.value;
-        const [latitude, longitude] = binding.geoLocation.value.match(/Point\(([-.\d]+) ([-.\d]+)\)/).slice(1).map(Number); // Parse the latitude and longitude from the geoLocation string
+
+        // Parse the latitude and longitude from the geoLocation string
+        const [latitude, longitude] = binding.geoLocation.value.match(/Point\(([-.\d]+) ([-.\d]+)\)/).slice(1).map(Number);
         parsedData[itemUri] = { label, geoPoint: [latitude, longitude] };
     });
 
@@ -57,7 +59,7 @@ function setMap(positions) {
     );
 
     tileLayer.addTo(map);
-
+  
     // Loop through the positions and create a marker with a popup for each position
     for (var i = 0; i < positions.length; i++) {
         var position = positions[i];

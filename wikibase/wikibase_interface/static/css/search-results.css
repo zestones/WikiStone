@@ -62,17 +62,21 @@ h1:hover {
     border-radius: 5px;
 }
 
-.pagination-section .pagination a {
+.pagination-section .pagination button {
     margin: 5px;
     text-decoration: none;
     color: #333;
     font-weight: 600;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
 }
 
-.pagination-section .pagination a.active {
+.pagination-section .pagination button.active {
     color: #005ce6;
 }
 
-.pagination-section .pagination a:hover {
+.pagination-section .pagination button:hover {
     color: #55c0f2;
 }

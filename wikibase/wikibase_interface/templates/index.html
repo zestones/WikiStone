@@ -73,8 +73,14 @@
 
         <div class="map-container">
           <form action="/map" class="map">
-            <button class="btn btn-map"> <img src="../static/icon/icon-map.png" class="img-map" alt="icon map">
-              <h4>See Map</h4></button>
+            <button class="btn btn-map">
+              <img
+                src="{{ url_for('static', filename='icon/icon-map.png') }}"
+                class="img-map"
+                alt="icon map"
+              />
+              <h4>See Map</h4>
+            </button>
           </form>
         </div>
       </div>
@@ -83,10 +89,10 @@
   </body>
   <script
     type="text/javascript"
-    src="{{ url_for('static', filename='js/advanced-search-form.js') }}"
+    src="{{ url_for('static', filename='js/search/advanced-search-form.js') }}"
   ></script>
   <script
-    type="text/javascript"
-    src="{{ url_for('static', filename='js/wiki-sparql-search.js') }}"
+    type="module"
+    src="{{ url_for('static', filename='js/search/wiki-sparql-search.js') }}"
   ></script>
 </html>
