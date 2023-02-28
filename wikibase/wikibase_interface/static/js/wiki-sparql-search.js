@@ -66,6 +66,9 @@ function getFormData() {
 }
 
 function displaySearch(results) {
+
+    const DISPLAYED_RESULTS = 7;
+
     // Select the result section element and clear its contents
     const resultSection = document.querySelector('.result-section');
     resultSection.innerHTML = '';
@@ -78,8 +81,8 @@ function displaySearch(results) {
     else {
         let count = 0;
         Object.entries(results).forEach(([_, value]) => {
-            // If we've already displayed 7 cards, exit early
-            if (count >= 7) return;
+            // If we've already displayed DISPLAYED_RESULTS cards, exit early
+            if (count >= DISPLAYED_RESULTS) return;
 
             // Create a new card element
             const card = document.createElement('div');
@@ -102,19 +105,35 @@ function displaySearch(results) {
             count++;
         });
 
-        // If there are more than 7 results, add a "See More" button to the bottom of the list
-        if (Object.keys(results).length > 7) {
+        // If there are more than DISPLAYED_RESULTS results, add a "See More" button to the bottom of the list
+        if (Object.keys(results).length > DISPLAYED_RESULTS) {
+            // Création du formulaire avec la méthode POST et l'action /all-results
+            const form = document.createElement('form');
+            form.classList.add('see-more-form');
+            form.setAttribute('method', 'POST');
+            form.setAttribute('action', '/all-results');
+
+            // Création d'un champ de saisie pour stocker les résultats JSON
+            const input = document.createElement('input');
+            input.setAttribute('type', 'hidden');
+            input.setAttribute('name', 'results');
+            input.setAttribute('value', JSON.stringify(results));
+            form.appendChild(input);
+
+            // Création d'un bouton "Voir plus"
             const seeMoreBtn = document.createElement('button');
             seeMoreBtn.textContent = 'See More';
             seeMoreBtn.classList.add('see-more');
-            resultSection.appendChild(seeMoreBtn);
+            form.appendChild(seeMoreBtn);
 
-            // And an EventListener
+            // Ajout du formulaire au DOM
+            resultSection.appendChild(form);
+
+            // Ajout d'un gestionnaire d'événements pour le clic sur le bouton "Voir plus"
             seeMoreBtn.addEventListener('click', () => {
-                const searchParams = new URLSearchParams();
-                searchParams.set('results', JSON.stringify(results));
-                window.location.href = '/all-results?' + searchParams.toString();
+                form.submit();
             });
+
         }
     }
 

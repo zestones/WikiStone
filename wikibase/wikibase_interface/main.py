@@ -20,13 +20,13 @@ def index():
     return render_template('index.html', data={}, first_render=True)
 
 
-@app.route('/all-results', methods=['GET'])
+@app.route('/all-results', methods=['POST'])
 def see_more():
-    data = json.loads(request.args.get('results'))
-    raw_data = request.args.get('results')
+    data = json.loads(request.form.get('results'))
+    raw_data = request.form.get('results')
 
-    items_per_page = request.args.get('items_per_page', default=5, type=int)
-    page = request.args.get('page', default=1, type=int)
+    items_per_page = request.form.get('items_per_page', default=5, type=int)
+    page = request.form.get('page', default=1, type=int)
 
     # Calculate the number of pages
     num_items = len(data)
