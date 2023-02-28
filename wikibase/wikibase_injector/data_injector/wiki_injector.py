@@ -42,6 +42,7 @@ def process_entities(py_wb, data, properties):
 
 # Inject the data in the wikibase
 def inject_data(py_wb, data, properties):
+
     # Process properties and create or update properties in the Wikibase
     process_properties(py_wb, properties)
     

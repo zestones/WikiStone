@@ -19,7 +19,8 @@ properties = {
     PROP_DEPARTEMENT[LABEL]: PROP_DEPARTEMENT,
     PROP_REGION[LABEL]: PROP_REGION,
     PROP_LOCATION[LABEL]: PROP_LOCATION,
-    PROP_ANECDOTE[LABEL]: PROP_ANECDOTE
+    PROP_ANECDOTE[LABEL]: PROP_ANECDOTE,
+    PROP_PRECISION_ON_PROTECTION[LABEL]: PROP_PRECISION_ON_PROTECTION
 }
 
 
@@ -79,7 +80,7 @@ def scrap_data(soup):
         if postal_code:
             monument[PROP_POSTCODE[LABEL]] = postal_code
         if details:
-            if len(details) > 250:
+            if len(details) > 400:
                 monument[PROP_PRECISION_ON_PROTECTION[LABEL]] = textwrap.wrap(details, width=400)[0]
         if comprendre:
             if len(comprendre) > 250:

@@ -16,7 +16,7 @@ electron:
 # Run the wiki_injector script with arguments
 .PHONY: inject
 inject:
-	- python3 wikibase_injector/main.py $(filter-out $@,$(MAKECMDGOALS))
+	- cd wikibase_injector && python3 main.py $(filter-out $@,$(MAKECMDGOALS))
 
 # Clean up generated files
 .PHONY: clean

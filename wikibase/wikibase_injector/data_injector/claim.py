@@ -68,6 +68,10 @@ def process_item_claims(py_wb, object, properties, claim_list, item, exist_item)
         # Format property label
         obj_label_formatted = obj_label.replace("_", " ")
 
+        # ! Skip the ITEM DESCRIPTION 
+        if obj_label not in properties:
+            continue
+        
         # Get the property id from the Wikibase
         prop_id = py_wb.Property().getPropertyId(obj_label_formatted.capitalize())
 

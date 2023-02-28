@@ -41,13 +41,13 @@ def process_api_data():
 
 
 @eel.expose
-def process_csv_data(py_wb):
+def process_csv_data():
     properties, data = data_clic_csv.retrieve_data()
     inject_data(py_wb, data, properties)
    
     
 @eel.expose
-def process_web_data(py_wb):
+def process_web_data():
     properties, data = data_loire_web.retrieve_data()
     inject_data(py_wb, data, properties)
 
