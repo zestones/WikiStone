@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WikiStone</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/map.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/search-results.css') }}"
+    />
+  </head>
+  <body>
+    <section class="search-section">
+      <div class="section-container">
+        <h1 onclick="window.location.href='/'">WikiStone</h1>
+        <form method="POST" action="/"></form>
+      </div>
+    </section>
+
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/map.js') }}"
+    ></script>
+  </body>
+</html>

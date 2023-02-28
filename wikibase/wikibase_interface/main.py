@@ -40,3 +40,7 @@ def see_more():
     data_page = list(data.items())[start_index:end_index]
 
     return render_template('search-results.html', data=data_page, page=page, items_per_page=items_per_page, results=raw_data, num_pages=num_pages)
+
+@app.route('/map')
+def display_map():
+    return render_template('map.html')
