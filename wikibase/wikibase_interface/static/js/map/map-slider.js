@@ -112,4 +112,4 @@ const value = document.getElementById("radius-value");
 // Get the checkbox element
 const displayLocationCheckbox = document.getElementById("displayLocation");
 
-export { setRadiusMap };
+export { setRadiusMap, displayAllLocation };

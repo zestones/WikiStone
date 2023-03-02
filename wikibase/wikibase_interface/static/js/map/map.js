@@ -1,6 +1,6 @@
 import { retrieveData, parseData } from "../map/retrieve-map-data.js";
 import { setMap, setUserMap, convertToPositions } from "../map/map-config.js";
-import { setRadiusMap } from "../map/map-slider.js";
+import { setRadiusMap, displayAllLocation } from "../map/map-slider.js";
 
 
 // Retrieve the user's location and display it on the map
@@ -21,5 +21,25 @@ navigator.geolocation.getCurrentPosition(function (position) {
 
 }, function (error) {
     // Handle the error if geolocation is not supported or if the user denies permission
-    console.log(error);
+    console.warn(error);
+
+    // Get the checkbox element
+    const displayLocationCheckbox = document.getElementById("displayLocation");
+
+    // Set the checkbox to checked and disabled
+    displayLocationCheckbox.checked = true;
+    displayLocationCheckbox.disabled = true;
+
+    // Get the slider element
+    const slider = document.getElementById("radius-slider");
+    slider.disabled = true;
+
+    // Retrieve the data and convert it to positions
+    retrieveData().then(data => {
+        const positions = convertToPositions(parseData(data));
+
+        // Display the map with the user's position and the retrieved positions
+        const map = setMap();
+        displayAllLocation(map, positions);
+    });
 });
