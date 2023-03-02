@@ -76,6 +76,7 @@ function setRadiusMap(map, userPosition, positions) {
 
     const userLatLng = L.latLng(userPosition);
     updateVisibleLocation(map, positions, userLatLng);
+    numberResult.innerHTML = Object.keys(markers).length + ' ' + 'Results';
 
     // Update the value element when the slider value changes
     slider.addEventListener("input", function () {
@@ -90,9 +91,9 @@ function setRadiusMap(map, userPosition, positions) {
         if (!displayLocationCheckbox.checked) {
             updateVisibleLocation(map, positions, userLatLng);
         }
+
+        numberResult.innerHTML = Object.keys(markers).length + ' ' + 'Results';
     });
-
-
 
     displayLocationCheckbox.addEventListener("change", function () {
         if (this.checked) {
@@ -101,6 +102,7 @@ function setRadiusMap(map, userPosition, positions) {
             // Checkbox is not checked, hide all positions
             updateVisibleLocation(map, positions, userLatLng);
         }
+        numberResult.innerHTML = Object.keys(markers).length + ' ' + 'Results';
     });
 
 }
@@ -111,5 +113,8 @@ const value = document.getElementById("radius-value");
 
 // Get the checkbox element
 const displayLocationCheckbox = document.getElementById("displayLocation");
+
+// Get the Number result element
+const numberResult = document.getElementById("number-results");
 
 export { setRadiusMap, displayAllLocation };

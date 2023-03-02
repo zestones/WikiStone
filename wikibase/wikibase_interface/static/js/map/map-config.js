@@ -1,11 +1,11 @@
 function convertToPositions(data) {
     const positions = [];
-    for (const [_, value] of Object.entries(data)) {
+    for (const [id, value] of Object.entries(data)) {
         const [lng, lat] = value.geoPoint;
         const position = {
             lat,
             lng,
-            popupContent: value.label,
+            popupContent: `<a class='popup-link' href='/result?id=${id}'>${value.label}</a> `,
         };
         positions.push(position);
     }

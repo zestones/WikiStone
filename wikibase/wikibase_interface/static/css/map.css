@@ -2,6 +2,13 @@ h1 {
     margin-bottom: 0px;
 }
 
+.section-container {
+    padding-left: 35px !important;
+    padding-right: 35px !important;
+    padding-bottom: 15px !important;
+    padding-top: 15px !important;
+}
+
 #map {
     height: 500px;
     width: 85%;
@@ -43,16 +50,40 @@ input[type=range] {
     border-radius: 10px;
     margin-bottom: 10px;
     margin-top: 10px;
+    opacity: 0.7;
+    transition: opacity .2s;
+    -webkit-transition: .2s;
+}
+
+input[type=range]:hover {
+    opacity: 1;
+}
+
+input[type=range]:active {
+    opacity: 1;
 }
 
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 24px;
-    height: 24px;
-    background: #333;
+    width: 25px;
+    height: 25px;
+    background-color: #333;
     border-radius: 50%;
     cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+
+input[type=range]::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    background-color: #333;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: .2s;
 }
 
 input[type=range]:focus::-webkit-slider-thumb {
@@ -135,4 +166,32 @@ input[type="checkbox"]:disabled:checked {
 
 input[type="checkbox"]:disabled:checked:after {
     color: #555;
+}
+
+.popup-link {
+    text-decoration: none;
+}
+
+.popup-link:hover {
+    color: #55c0f2;
+    text-decoration: 1px underline;
+}
+
+.number-result {
+    display: flex;
+    justify-content: left;
+}
+
+#number-results {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #337ab7;
 }

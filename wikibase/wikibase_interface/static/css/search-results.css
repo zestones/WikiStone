@@ -16,6 +16,11 @@ h1:hover {
     color: #55c0f2;
 }
 
+.card .results-title:hover {
+    cursor: pointer;
+    color: #005ce6;
+}
+
 .all-results-section {
     width: 90%;
     height: auto;
@@ -38,16 +43,6 @@ h1:hover {
 
     padding-left: 22px;
     margin: 0 auto;
-}
-
-.all-results-section .card:hover {
-    padding: 15px;
-    border-radius: 15px;
-    height: auto;
-    min-height: 150px;
-    box-shadow: 5px 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    border: none;
-    cursor: pointer;
 }
 
 .pagination-section {
