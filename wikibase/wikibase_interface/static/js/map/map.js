@@ -1,14 +1,15 @@
 function retrieveData() {
     const endpointUrl = 'http://localhost:8834/proxy/wdqs/bigdata/namespace/wdq/sparql';
     const query =
-        `SELECT ?item ?itemLabel ?geoLocation
-            WHERE {
-                ?item wdt:P9 ?geoLocation.
-                SERVICE wikibase:label {
-                    bd:serviceParam wikibase:language "en".
-                    ?item rdfs:label ?itemLabel.
-                }
+        `SELECT ?item ?itemLabel ?geoLocation WHERE {
+            ?item ?p ?geoLocation .
+            ?prop wikibase:directClaim ?p ;
+                rdfs:label "Location"@en .
+            SERVICE wikibase:label {
+                bd:serviceParam wikibase:language "en" .
+                ?item rdfs:label ?itemLabel .
             }
+          }          
         `;
 
     const fullUrl = endpointUrl + '?query=' + encodeURIComponent(query);
@@ -59,7 +60,7 @@ function setMap(positions) {
     );
 
     tileLayer.addTo(map);
-  
+
     // Loop through the positions and create a marker with a popup for each position
     for (var i = 0; i < positions.length; i++) {
         var position = positions[i];
