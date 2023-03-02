@@ -96,14 +96,6 @@ input[type=range]:disabled {
     top: 2px;
 }
 
-/* input[type="checkbox"i]:disabled {
-    cursor: not-allowed;
-}
-
-input[type="checkbox"i] {
-    cursor: pointer;
-} */
-
 input[type="checkbox"] {
     cursor: pointer;
     position: relative;
