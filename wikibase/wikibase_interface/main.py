@@ -21,7 +21,6 @@ app = Flask(__name__)
 def index():
     return render_template('index.html', data={}, first_render=True)
 
-
 @app.route('/all-results', methods=['POST'])
 def see_more():
     data = json.loads(request.form.get('results'))
@@ -39,8 +38,7 @@ def see_more():
     end_index = start_index + items_per_page
 
     # Slice the data to get only the items for the current page
-    data_page = list(data.items())[start_index:end_index]
-
+    data_page = list(data.items())[start_index:end_index]    
     return render_template('search-results.html', data=data_page, page=page, items_per_page=items_per_page, results=raw_data, num_pages=num_pages)
 
 
@@ -48,7 +46,6 @@ def see_more():
 def display_map():
     return render_template('map.html')
 
-import json
 
 def parse_item_data(claims):
     result = {}
@@ -73,7 +70,5 @@ def display_item_page():
     item = py_wb.Item().get(entity_id=item_id)
     claims = item.claims.to_dict()
 
-    data, prop_label = parse_item_data(claims)
-    # print(json.dumps(data, indent=2))
-    
+    data, prop_label = parse_item_data(claims)    
     return render_template('item.html', data=data, prop_label=prop_label)
