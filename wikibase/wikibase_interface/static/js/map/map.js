@@ -125,11 +125,6 @@ function setMap(positions, userPosition) {
     }
 }
 
-
-function updateSearchRadius() {
-
-}
-
 // Retrieve the user's location and display it on the map
 navigator.geolocation.getCurrentPosition(function (position) {
     // Get the user's latitude and longitude
