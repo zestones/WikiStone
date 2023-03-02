@@ -63,19 +63,50 @@ function setMap(positions, userPosition) {
 
     tileLayer.addTo(map);
 
-    // Define the SVG code
-    const svgCode = '<svg fill="#ff0000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-39.57 -39.57 474.85 474.85" xml:space="preserve" stroke="#ff0000" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)" stroke-width="0.0039571"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M197.849,0C122.131,0,60.531,61.609,60.531,137.329c0,72.887,124.591,243.177,129.896,250.388l4.951,6.738 c0.579,0.792,1.501,1.255,2.471,1.255c0.985,0,1.901-0.463,2.486-1.255l4.948-6.738c5.308-7.211,129.896-177.501,129.896-250.388 C335.179,61.609,273.569,0,197.849,0z M197.849,88.138c27.13,0,49.191,22.062,49.191,49.191c0,27.115-22.062,49.191-49.191,49.191 c-27.114,0-49.191-22.076-49.191-49.191C148.658,110.2,170.734,88.138,197.849,88.138z"></path> </g> </g></svg>';
-
-    // Define the custom icon using the SVG code
-    const customIcon = L.icon({
-        iconUrl: 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgCode),
-        iconSize: [40, 40], // Adjust the size of the icon as needed
-        iconAnchor: [20, 0], // Adjust the anchor point of the icon as needed
+    // Create a red icon for the user marker
+    const userIcon = L.icon({
+        iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
     });
 
-    // Create a marker using the custom icon
-    const userMarker = L.marker(userPosition, { icon: customIcon }).addTo(map);
-    userMarker.bindPopup("<div class='popup'><p>Your location</p></div>");
+    // Create a marker for the user location with the custom icon
+    const userMarker = L.marker(userPosition, { icon: userIcon }).addTo(map);
+    userMarker.bindPopup("Your location");
+
+    // Save a reference to the previously drawn circle
+    let circle;
+
+    // Get the slider element
+    const slider = document.getElementById("radius-slider");
+
+    // Get the value element
+    const value = document.getElementById("radius-value");
+
+    // Update the value element with the initial value
+    value.innerHTML = slider.value;
+
+    // Update the value element when the slider value changes
+    slider.addEventListener("input", function () {
+        const radius = this.value;
+        value.innerHTML = radius;
+
+        // Remove the previously drawn circle, if it exists
+        if (circle) {
+            map.removeLayer(circle);
+        }
+
+        // Create a new circle and add it to the map
+        circle = L.circle(userPosition, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.1,
+            radius: radius
+        }).addTo(map);
+    });
 
 
     // Loop through the positions and create a marker with a popup for each position
@@ -84,6 +115,11 @@ function setMap(positions, userPosition) {
         var marker = L.marker([position.lat, position.lng]).addTo(map);
         marker.bindPopup(position.popupContent);
     }
+}
+
+
+function updateSearchRadius() {
+
 }
 
 // Retrieve the user's location and display it on the map
@@ -98,6 +134,9 @@ navigator.geolocation.getCurrentPosition(function (position) {
         // Display the map with the user's position and the retrieved positions
         setMap(positions, userPosition);
     });
+
+    // updateSearchRadius();
+
 }, function (error) {
     // Handle the error if geolocation is not supported or if the user denies permission
     console.log(error);

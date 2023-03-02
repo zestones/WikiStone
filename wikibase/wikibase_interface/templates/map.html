@@ -26,7 +26,19 @@
     <section class="search-section">
       <div class="section-container">
         <h1 onclick="window.location.href='/'">WikiStone</h1>
-        <form method="POST" action="/"></form>
+        <div class="form-group">
+          <label for="radius-slider">Search radius:</label>
+          <input
+            type="range"
+            class="custom-range"
+            id="radius-slider"
+            min="100"
+            max="10000"
+            step="100"
+            value="5000"
+          />
+          <span id="radius-value">5000</span> meters
+        </div>
       </div>
     </section>
 
