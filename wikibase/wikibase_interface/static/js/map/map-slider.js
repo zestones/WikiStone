@@ -10,7 +10,7 @@ function createCircleRadius(radius, userPosition) {
 // Create an object to store all the marker objects
 const markers = {};
 
-function displayVisibleLocation(map, positions, userLatLng) {
+function updateVisibleLocation(map, positions, userLatLng) {
     // Filter the positions based on their distance from the user's location and the radius
     const filteredPositions = positions.filter(position => {
         const positionLatLng = L.latLng(position.lat, position.lng);
@@ -47,6 +47,24 @@ function displayVisibleLocation(map, positions, userLatLng) {
     }
 }
 
+function displayAllLocation(map, positions) {
+
+    // Loop through the positions and create a marker with a popup for each position
+    for (var i = 0; i < positions.length; i++) {
+        var position = positions[i];
+        // Generate a unique ID for the marker
+        const markerId = position.lat + '&' + position.lng;
+
+        if (!markers[markerId]) {
+            var marker = L.marker([position.lat, position.lng]).addTo(map);
+            marker.bindPopup(position.popupContent);
+
+            // Add the marker's ID to the object of markers
+            markers[markerId] = marker;
+        }
+    }
+}
+
 
 function setRadiusMap(map, userPosition, positions) {
     // Save a reference to the previously drawn circle
@@ -57,7 +75,7 @@ function setRadiusMap(map, userPosition, positions) {
     circle = createCircleRadius(slider.value, userPosition).addTo(map);
 
     const userLatLng = L.latLng(userPosition);
-    displayVisibleLocation(map, positions, userLatLng);
+    updateVisibleLocation(map, positions, userLatLng);
 
     // Update the value element when the slider value changes
     slider.addEventListener("input", function () {
@@ -69,12 +87,29 @@ function setRadiusMap(map, userPosition, positions) {
 
         // Create a new circle and add it to the map
         circle = createCircleRadius(radius, userPosition).addTo(map);
-        displayVisibleLocation(map, positions, userLatLng);
+        if (!displayLocationCheckbox.checked) {
+            updateVisibleLocation(map, positions, userLatLng);
+        }
     });
+
+
+
+    displayLocationCheckbox.addEventListener("change", function () {
+        if (this.checked) {
+            displayAllLocation(map, positions, userLatLng);
+        } else {
+            // Checkbox is not checked, hide all positions
+            updateVisibleLocation(map, positions, userLatLng);
+        }
+    });
+
 }
 
 // Get the slider element
 const slider = document.getElementById("radius-slider");
 const value = document.getElementById("radius-value");
+
+// Get the checkbox element
+const displayLocationCheckbox = document.getElementById("displayLocation");
 
 export { setRadiusMap };
