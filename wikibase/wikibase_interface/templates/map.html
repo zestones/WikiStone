@@ -26,14 +26,37 @@
     <section class="search-section">
       <div class="section-container">
         <h1 onclick="window.location.href='/'">WikiStone</h1>
-        <form method="POST" action="/"></form>
+        <hr>
+        <div class="search-config">
+          <label for="radius-slider">Search radius</label>
+          <input
+            type="range"
+            class="custom-range"
+            id="radius-slider"
+            min="1000"
+            max="200000"
+            step="100"
+            value="5000"
+          />
+          <span id="radius-value">5.0 km</span>
+          <div class="checkbox-container">
+            <input
+              type="checkbox"
+              id="displayLocation"
+              name="Display everything"
+              value="Display everything"
+            />
+            <label for="displayLocation">Display everything</label>
+            <span class="checkbox-message">Check to display all locations</span>
+          </div>
+        </div>
       </div>
     </section>
 
     <div id="map"></div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script
-      type="text/javascript"
+      type="module"
       src="{{ url_for('static', filename='js/map/map.js') }}"
     ></script>
   </body>
