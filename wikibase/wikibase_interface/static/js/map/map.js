@@ -56,20 +56,43 @@ function createCircleRadius(radius, userPosition) {
     });
 }
 
-function userLocation(map, userPosition) {
+let markers = [];
+
+function displayVisibleLocation(map, positions, userLatLng) {
+    // Filter the positions based on their distance from the user's location and the radius
+    const filteredPositions = positions.filter(position => {
+        const positionLatLng = L.latLng(position.lat, position.lng);
+        const distance = userLatLng.distanceTo(positionLatLng);
+        return distance <= slider.value;
+    });
+
+    // Loop through the filtered positions and create a marker with a popup for each position
+    for (var i = 0; i < filteredPositions.length; i++) {
+        var position = filteredPositions[i];
+        
+        // Generate a unique ID for the marker
+        const markerId = 'marker-' + position.lat + '-' + position.lng;
+        // Check if the marker has already been added to the map
+        if (!markers.includes(markerId)) {
+            var marker = L.marker([position.lat, position.lng]).addTo(map);
+            marker.bindPopup(position.popupContent);
+            // Add the marker's ID to the array of markers
+            markers.push(markerId);
+        }
+    }
+}
+
+
+function setRadiusMap(map, userPosition, positions) {
     // Save a reference to the previously drawn circle
     let circle;
 
-    // Get the slider element
-    const slider = document.getElementById("radius-slider");
-
-    // Get the value element
-    const value = document.getElementById("radius-value");
-
     // Update the value element with the initial value
     value.innerHTML = (slider.value / 1000).toFixed(1) + " km";
-
     circle = createCircleRadius(slider.value, userPosition).addTo(map);
+
+    const userLatLng = L.latLng(userPosition);
+    displayVisibleLocation(map, positions, userLatLng);
 
     // Update the value element when the slider value changes
     slider.addEventListener("input", function () {
@@ -77,16 +100,15 @@ function userLocation(map, userPosition) {
         value.innerHTML = (radius / 1000).toFixed(1) + " km";;
 
         // Remove the previously drawn circle, if it exists
-        if (circle) {
-            map.removeLayer(circle);
-        }
+        if (circle) map.removeLayer(circle);
 
         // Create a new circle and add it to the map
         circle = createCircleRadius(radius, userPosition).addTo(map);
+        displayVisibleLocation(map, positions, userLatLng);
     });
 }
 
-function setMap(positions, userPosition) {
+function setMap() {
 
     const saintEtienne = [45.4397, 4.3878];
     var map = L.map("map").setView(saintEtienne, 11);
@@ -101,6 +123,11 @@ function setMap(positions, userPosition) {
 
     tileLayer.addTo(map);
 
+    return map;
+}
+
+
+function setUserMap(map, userPosition) {
     // Create a red icon for the user marker
     const userIcon = L.icon({
         iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
@@ -114,16 +141,12 @@ function setMap(positions, userPosition) {
     // Create a marker for the user location with the custom icon
     const userMarker = L.marker(userPosition, { icon: userIcon }).addTo(map);
     userMarker.bindPopup("Your location");
-
-    userLocation(map, userPosition);
-
-    // Loop through the positions and create a marker with a popup for each position
-    for (var i = 0; i < positions.length; i++) {
-        var position = positions[i];
-        var marker = L.marker([position.lat, position.lng]).addTo(map);
-        marker.bindPopup(position.popupContent);
-    }
 }
+
+// Get the slider element
+const slider = document.getElementById("radius-slider");
+const value = document.getElementById("radius-value");
+
 
 // Retrieve the user's location and display it on the map
 navigator.geolocation.getCurrentPosition(function (position) {
@@ -135,7 +158,9 @@ navigator.geolocation.getCurrentPosition(function (position) {
         const positions = convertToPositions(parseData(data))
 
         // Display the map with the user's position and the retrieved positions
-        setMap(positions, userPosition);
+        const map = setMap();
+        setUserMap(map, userPosition);
+        setRadiusMap(map, userPosition, positions);
     });
 
 }, function (error) {
