@@ -47,6 +47,44 @@ function convertToPositions(data) {
     return positions;
 }
 
+function createCircleRadius(radius, userPosition) {
+    return L.circle(userPosition, {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.1,
+        radius: radius
+    });
+}
+
+function userLocation(map, userPosition) {
+    // Save a reference to the previously drawn circle
+    let circle;
+
+    // Get the slider element
+    const slider = document.getElementById("radius-slider");
+
+    // Get the value element
+    const value = document.getElementById("radius-value");
+
+    // Update the value element with the initial value
+    value.innerHTML = (slider.value / 1000).toFixed(1) + " km";
+
+    circle = createCircleRadius(slider.value, userPosition).addTo(map);
+
+    // Update the value element when the slider value changes
+    slider.addEventListener("input", function () {
+        const radius = this.value;
+        value.innerHTML = (radius / 1000).toFixed(1) + " km";;
+
+        // Remove the previously drawn circle, if it exists
+        if (circle) {
+            map.removeLayer(circle);
+        }
+
+        // Create a new circle and add it to the map
+        circle = createCircleRadius(radius, userPosition).addTo(map);
+    });
+}
 
 function setMap(positions, userPosition) {
 
@@ -77,37 +115,7 @@ function setMap(positions, userPosition) {
     const userMarker = L.marker(userPosition, { icon: userIcon }).addTo(map);
     userMarker.bindPopup("Your location");
 
-    // Save a reference to the previously drawn circle
-    let circle;
-
-    // Get the slider element
-    const slider = document.getElementById("radius-slider");
-
-    // Get the value element
-    const value = document.getElementById("radius-value");
-
-    // Update the value element with the initial value
-    value.innerHTML = slider.value;
-
-    // Update the value element when the slider value changes
-    slider.addEventListener("input", function () {
-        const radius = this.value;
-        value.innerHTML = radius;
-
-        // Remove the previously drawn circle, if it exists
-        if (circle) {
-            map.removeLayer(circle);
-        }
-
-        // Create a new circle and add it to the map
-        circle = L.circle(userPosition, {
-            color: 'red',
-            fillColor: '#f03',
-            fillOpacity: 0.1,
-            radius: radius
-        }).addTo(map);
-    });
-
+    userLocation(map, userPosition);
 
     // Loop through the positions and create a marker with a popup for each position
     for (var i = 0; i < positions.length; i++) {
@@ -134,8 +142,6 @@ navigator.geolocation.getCurrentPosition(function (position) {
         // Display the map with the user's position and the retrieved positions
         setMap(positions, userPosition);
     });
-
-    // updateSearchRadius();
 
 }, function (error) {
     // Handle the error if geolocation is not supported or if the user denies permission
