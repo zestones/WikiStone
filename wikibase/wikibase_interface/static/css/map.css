@@ -136,3 +136,12 @@ input[type="checkbox"]:disabled:checked {
 input[type="checkbox"]:disabled:checked:after {
     color: #555;
 }
+
+.popup-link {
+    text-decoration: none;
+}
+
+.popup-link:hover {
+    color: #55c0f2;
+    text-decoration: 1px underline;
+}
