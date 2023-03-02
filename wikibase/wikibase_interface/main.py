@@ -58,9 +58,11 @@ def parse_item_data(claims):
         prop_label.append(property_label)
         
         for claim in claim_list:
-            result[property_label] = str(claim.value)
-            print(claim.value)
-    
+            if property_label == 'Location':
+                result[property_label] = [float(claim.value.latitude), float(claim.value.longitude)]
+            else:
+                result[property_label] = str(claim.value)
+                 
     return result, prop_label
 
 
@@ -72,6 +74,6 @@ def display_item_page():
     claims = item.claims.to_dict()
 
     data, prop_label = parse_item_data(claims)
-    print(json.dumps(data, indent=2))
+    # print(json.dumps(data, indent=2))
     
     return render_template('item.html', data=data, prop_label=prop_label)

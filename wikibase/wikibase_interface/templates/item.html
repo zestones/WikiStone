@@ -17,6 +17,10 @@
       type="text/css"
       href="{{ url_for('static', filename='css/item.css') }}"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
   </head>
   <body>
     <section class="search-section">
@@ -97,9 +101,7 @@
         {% endif %} {% if data['Location'] %}
         <div class="item-group">
           <h3 class="item-group-title">Localisation</h3>
-          <p class="item-prop">
-            <strong>Localisation:</strong> {{ data['Location'] }}
-          </p>
+          <div id="map" style="height: 400px"></div>
         </div>
         {% endif %} {% if not data['Location'] and not data['Anecdote'] and not
         data['Precision on the protection'] and not data['Historique'] %}
@@ -110,5 +112,13 @@
         {% endif %}
       </div>
     </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/map/item-location.js') }}"
+    ></script>
+    <script>
+      displayItemLocation("{{ data['Location'] }}");
+    </script>
   </body>
 </html>
