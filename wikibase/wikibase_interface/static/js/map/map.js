@@ -34,6 +34,9 @@ navigator.geolocation.getCurrentPosition(function (position) {
     const slider = document.getElementById("radius-slider");
     slider.disabled = true;
 
+    // Get the Number result element
+    const numberResult = document.getElementById("number-results");
+
     // Retrieve the data and convert it to positions
     retrieveData().then(data => {
         const positions = convertToPositions(parseData(data));
@@ -41,5 +44,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
         // Display the map with the user's position and the retrieved positions
         const map = setMap();
         displayAllLocation(map, positions);
+
+        numberResult.innerHTML = (positions.length - 1) + ' ' + 'Results';
     });
 });
