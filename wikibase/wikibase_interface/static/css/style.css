@@ -278,6 +278,11 @@ h2.fetch-error {
   color: #0066cc;
 }
 
+.result-section h2:hover {
+  cursor: pointer;
+  color: #55c0f2;
+}
+
 .result-section .no-result {
   color: #fff;
   font-weight: 900;

@@ -238,6 +238,23 @@ class Property(Entity):
                 return True
 
         return False
+    
+    def getPropertyLabel(self, prop_id):
+        # Set the API parameters
+        params = {
+            "action": "wbsearchentities",
+            "format": "json",
+            "language": "en",
+            "type": "property",
+            "search": prop_id
+        }
+
+        response = requests.get(self.py_wb.api_url, params=params).json()
+        if "success" in response and response["success"] == 1:
+            if "search" in response and len(response["search"]) > 0:
+                return response["search"][0]["label"]
+
+        return None
 
 
 def check_item_param(prop, param_name="item"):

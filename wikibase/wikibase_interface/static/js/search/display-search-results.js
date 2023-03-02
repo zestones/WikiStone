@@ -1,6 +1,6 @@
 function seeMoreResults(results) {
     const resultSection = document.querySelector('.result-section');
-    
+
     // Create form with POST method to action all-results
     const form = document.createElement('form');
     form.classList.add('see-more-form');
@@ -42,7 +42,7 @@ function animateCards() {
 }
 
 export function displaySearch(results) {
-
+    console.log(results)
     const DISPLAYED_RESULTS = 7;
 
     // Select the result section element and clear its contents
@@ -56,7 +56,7 @@ export function displaySearch(results) {
     // Otherwise, iterate over the results and create a card for each item
     else {
         let count = 0;
-        Object.entries(results).forEach(([_, value]) => {
+        Object.entries(results).forEach(([id, value]) => {
             // If we've already displayed DISPLAYED_RESULTS cards, exit early
             if (count >= DISPLAYED_RESULTS) return;
 
@@ -66,6 +66,11 @@ export function displaySearch(results) {
 
             // Add the item's title to the card
             const title = document.createElement('h2');
+            // Add onclick event to the title element
+            title.onclick = () => window.location.href = `/result?id=${id}`;
+
+            // Add id attribute to the title element
+            title.setAttribute('id', id);
             title.textContent = value?.label;
             card.appendChild(title);
 

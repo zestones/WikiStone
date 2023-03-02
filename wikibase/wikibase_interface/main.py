@@ -1,16 +1,18 @@
-from flask import Flask, render_template, request
+from flask import Flask, jsonify, render_template, request
 import json
 import math
-import sys
+
 import os
+import sys
 
 # add the parent directory of main.py to Python path to enable import modules from the wikibase package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
 from wikibase_request_api.python_wikibase import PyWikibase
 
+# Authenticate with Wikibase
 conf_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../config.json')
-py_wb = PyWikibase(config_path=conf_path)
+py_wb = PyWikibase(config_path=conf_path)  
+
 
 app = Flask(__name__)
 
@@ -41,6 +43,35 @@ def see_more():
 
     return render_template('search-results.html', data=data_page, page=page, items_per_page=items_per_page, results=raw_data, num_pages=num_pages)
 
+
 @app.route('/map')
 def display_map():
     return render_template('map.html')
+
+import json
+
+def parse_item_data(claims):
+    result = {}
+    prop_label = []
+    for property_id, claim_list in claims.items():
+        property_label = py_wb.Property().getPropertyLabel(property_id)
+        prop_label.append(property_label)
+        
+        for claim in claim_list:
+            result[property_label] = str(claim.value)
+            print(claim.value)
+    
+    return result, prop_label
+
+
+@app.route('/result', methods=['GET'])
+def display_item_page():
+    item_id = request.args.get('id')
+
+    item = py_wb.Item().get(entity_id=item_id)
+    claims = item.claims.to_dict()
+
+    data, prop_label = parse_item_data(claims)
+    print(json.dumps(data, indent=2))
+    
+    return render_template('item.html', data=data, prop_label=prop_label)
