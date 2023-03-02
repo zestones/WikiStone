@@ -56,7 +56,8 @@ function createCircleRadius(radius, userPosition) {
     });
 }
 
-let markers = [];
+// Create an object to store all the marker objects
+const markers = {};
 
 function displayVisibleLocation(map, positions, userLatLng) {
     // Filter the positions based on their distance from the user's location and the radius
@@ -69,15 +70,28 @@ function displayVisibleLocation(map, positions, userLatLng) {
     // Loop through the filtered positions and create a marker with a popup for each position
     for (var i = 0; i < filteredPositions.length; i++) {
         var position = filteredPositions[i];
-        
         // Generate a unique ID for the marker
-        const markerId = 'marker-' + position.lat + '-' + position.lng;
+        const markerId = position.lat + '&' + position.lng;
+
         // Check if the marker has already been added to the map
-        if (!markers.includes(markerId)) {
+        if (!markers[markerId]) {
             var marker = L.marker([position.lat, position.lng]).addTo(map);
             marker.bindPopup(position.popupContent);
-            // Add the marker's ID to the array of markers
-            markers.push(markerId);
+            // Add the marker's ID to the object of markers
+            markers[markerId] = marker;
+        }
+    }
+
+    // Remove markers that are not within the radius
+    for (const markerId in markers) {
+        const marker = markers[markerId];
+        const latLng = marker._latlng;
+        const isMarkerInRadius = filteredPositions.some(position => {
+            return position.lat === latLng.lat && position.lng === latLng.lng;
+        });
+        if (!isMarkerInRadius) {
+            map.removeLayer(marker);
+            delete markers[markerId];
         }
     }
 }
