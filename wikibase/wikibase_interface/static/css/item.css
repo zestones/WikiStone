@@ -5,7 +5,7 @@
     width: 93%;
     box-shadow: 0 0 5px rgb(0 0 0 / 20%);
     margin: 0 auto;
-    margin-bottom: 58px;
+    margin-bottom: 44px;
 }
 
 .item-title {
@@ -64,4 +64,26 @@
     width: 100%;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.item-proposition {
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+    padding: 21px;
+    margin-bottom: 22px;
+}
+
+.item-card-proposition h4:hover {
+    color: #55c0f2;
+    cursor: pointer;
+}
+
+.item-card-proposition {
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 100%;
 }
