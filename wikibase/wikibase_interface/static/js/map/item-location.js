@@ -1,5 +1,4 @@
 function displayItemLocation(location) {
-    console.log(location)
     var coords = location.split(',');
     const latlng = coords.map(function (coord) {
         return parseFloat(coord.replace(/\[|\]/g, ''));
