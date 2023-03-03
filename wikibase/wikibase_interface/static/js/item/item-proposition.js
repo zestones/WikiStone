@@ -89,8 +89,6 @@ const queryDispatcher = new SPARQLQueryDispatcher();
 queryDispatcher.query(sparqlQuery)
     .then((data) => {
         const parsedData = queryDispatcher.parse(data);
-        console.log(parsedData);
-
         const sortedKeys = Object.keys(parsedData).sort((a, b) => {
             const distanceA = parseFloat(parsedData[a].distance);
             const distanceB = parseFloat(parsedData[b].distance);
