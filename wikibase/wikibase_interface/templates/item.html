@@ -21,6 +21,24 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"
+    ></script>
   </head>
   <body>
     <section class="search-section">
@@ -31,7 +49,7 @@
     <div class="details-item-container">
       <h2 class="item-title">{{ data['Name'] }}</h2>
       {% if description %}
-        <p class="description"> {{ description }} </p>
+      <p class="description">{{ description }}</p>
       {% endif %}
       <div class="item-info">
         <div class="item-group">
@@ -115,8 +133,9 @@
         {% endif %}
       </div>
     </div>
-
-    <section class="item-proposition"></section>
+    <h2 id="nearby">À Proximité</h2>  
+    <section class="item-proposition">
+    </section>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script
       type="text/javascript"

@@ -66,12 +66,16 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-.item-proposition {
-    width: 90%;
+#nearby {
+    color: white;
     display: flex;
-    margin: 0 auto;
-    padding: 21px;
-    margin-bottom: 22px;
+    justify-content: center;
+}
+
+.item-proposition {
+    position: relative;
+    width: 95%;
+    margin: 22px auto;
 }
 
 .item-card-proposition h4:hover {
@@ -79,11 +83,76 @@
     cursor: pointer;
 }
 
+.carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
 .item-card-proposition {
-    background: #fff;
-    border-radius: 12px;
-    padding: 10px;
-    margin-left: 15px;
+    flex: 0 0 auto;
     margin-right: 15px;
-    width: 100%;
+    margin-left: 15px;
+    max-height: 100px !important;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    text-align: center;
+    scroll-snap-align: start;
+}
+
+.item-card-proposition:hover {
+    cursor: grab;
+}
+
+.carousel-prev,
+.carousel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.carousel-next {
+    left: 100%;
+}
+
+.carousel-prev {
+    right: 100%;
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.carousel-prev:hover:before,
+.carousel-next:hover:before {
+    transform: translateX(4px);
+    box-shadow: -4px 0 4px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.carousel-prev:before,
+.carousel-next:before {
+    content: "";
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8px 0 8px 12px;
+    border-color: transparent transparent transparent #fff;
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.carousel-next:before {
+    transform: rotate(0deg);
+}
+
+.carousel {
+    position: relative;
 }
