@@ -9,11 +9,16 @@
 }
 
 .item-title {
-    margin-top: 8px;
-    margin-bottom: 20px;
     font-size: 24px;
     text-align: center;
     color: #333;
+    margin-top: 44px;
+}
+
+.description {
+    width: 65%;
+    margin: 31px auto;
+    text-align: center;
 }
 
 .item-info {
@@ -21,7 +26,6 @@
     flex-wrap: wrap;
     margin: 25px;
     justify-content: center;
-    margin-top: 63px;
     padding: 26px;
 }
 

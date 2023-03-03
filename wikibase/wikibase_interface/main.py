@@ -68,7 +68,8 @@ def display_item_page():
     item_id = request.args.get('id')
 
     item = py_wb.Item().get(entity_id=item_id)
+    description = item.description.get()
     claims = item.claims.to_dict()
 
     data, prop_label = parse_item_data(claims)    
-    return render_template('item.html', data=data, prop_label=prop_label)
+    return render_template('item.html', data=data, prop_label=prop_label, description=description)

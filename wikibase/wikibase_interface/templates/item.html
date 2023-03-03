@@ -30,6 +30,9 @@
     </section>
     <div class="details-item-container">
       <h2 class="item-title">{{ data['Name'] }}</h2>
+      {% if description %}
+        <p class="description"> {{ description }} </p>
+      {% endif %}
       <div class="item-info">
         <div class="item-group">
           <h3 class="item-group-title">Adresse</h3>
