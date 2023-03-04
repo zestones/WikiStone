@@ -1,0 +1,38 @@
+.property-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#property-names {
+    width: 30%;
+    list-style-type: none;
+}
+
+#property-names li {
+    cursor: pointer;
+    padding: 10px;
+}
+
+#property-names li:hover {
+    background-color: lightgray;
+}
+
+#property-details {
+    width: 60%;
+}
+
+#property-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#property-description {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#property-type {
+    font-size: 16px;
+    font-style: italic;
+}

@@ -31,7 +31,7 @@ class SPARQLQueryDispatcher {
 }
 
 function searchAllProrperties() {
-    const sparqlQuery =  `SELECT ?id ?label ?description ?type
+    const sparqlQuery = `SELECT ?id ?label ?description ?type
         WHERE { 
             ?property a wikibase:Property ;
                 wikibase:propertyType ?type ;
@@ -46,14 +46,48 @@ function searchAllProrperties() {
     return sparqlQuery;
 }
 
-const sparqlQuery = searchAllProrperties();
+document.addEventListener('DOMContentLoaded', () => {
+    const sparqlQuery = searchAllProrperties();
+    const queryDispatcher = new SPARQLQueryDispatcher();
+    queryDispatcher.query(sparqlQuery)
+        .then((data) => {
+            const parsedData = queryDispatcher.parse(data);
+            console.log(parsedData);
 
-const queryDispatcher = new SPARQLQueryDispatcher();
-queryDispatcher.query(sparqlQuery)
-    .then((data) => {
-        console.log(data)
-        console.log(queryDispatcher.parse(data))
-    })
-    .catch((error) => {
-        console.log('error' + error)
+            console.log("loaded")
+            displayProperties(parsedData);
+        })
+        .catch((error) => {
+            console.log('error' + error);
+        });
+});
+function displayProperties(properties) {
+    const propertyNames = Object.keys(properties);
+    console.log("here")
+
+    const propertyList = document.querySelector('#property-names');
+    console.log(propertyList)
+
+    propertyNames.forEach(name => {
+        const li = document.createElement('li');
+        li.textContent = name;
+        li.addEventListener('click', () => {
+            displayPropertyDetails(properties[name]);
+        });
+        propertyList.appendChild(li);
     });
+}
+
+function displayPropertyDetails(property) {
+    const propertyTitle = document.querySelector('#property-title');
+    propertyTitle.textContent = property.label;
+
+    const propertyDescription = document.querySelector('#property-description');
+    propertyDescription.textContent = property.description;
+
+    const propertyType = document.querySelector('#property-type');
+    propertyType.textContent = `Type: ${property.type}`;
+
+    const propertyDetails = document.querySelector('#property-details');
+    propertyDetails.style.display = 'block';
+}
