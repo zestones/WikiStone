@@ -71,5 +71,6 @@ def display_item_page():
     description = item.description.get()
     claims = item.claims.to_dict()
 
+    title = item.label.get()
     data, prop_label = parse_item_data(claims)    
-    return render_template('item.html', data=data, prop_label=prop_label, description=description)
+    return render_template('item.html', data=data, prop_label=prop_label, description=description, title=title)
