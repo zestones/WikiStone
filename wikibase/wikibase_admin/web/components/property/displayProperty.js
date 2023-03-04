@@ -53,6 +53,9 @@ export function displayPropertyDetails(properties, name) {
         const newLabel = getElementText('#property-title');
         const newDescription = getElementText('#property-description');
 
+        // check if can update 
+        if (!canUpdateProperty(properties, newLabel, newDescription)) return;
+
         // Call a function to update the property with the new details
         updateProperty(name, newLabel, newDescription);
 
@@ -133,4 +136,29 @@ function replaceOrAddButton(selector, type, onClick) {
     button.onclick = onClick;
 
     document.querySelector('#property-details').appendChild(button);
+}
+
+
+const hasPropertyWithLabel = (properties, newLabel) => {
+    for (const propertyId in properties) {
+        const property = properties[propertyId];
+
+        if (property.label === newLabel) return true;
+    }
+    return false;
+}
+
+const canUpdateProperty = (properties, newLabel, newDescription) => {
+    if (newDescription === newLabel) {
+        window.alert("The label and the description should have different text.");
+        console.warn("The label and the description should have different text.");
+        return false
+    }
+    else if (hasPropertyWithLabel(properties, newLabel)) {
+        console.warn("This property already exist.");
+        window.alert("This property already exist.");
+        return false;
+    }
+
+    return true;
 }

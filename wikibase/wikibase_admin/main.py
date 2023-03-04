@@ -65,10 +65,14 @@ def deleteProperty(id):
     
 @eel.expose
 def createProperty(label, description, type):
-    prop = py_wb.Property().create(label, data_type=type)
-    prop.description.set(description, language=py_wb.language)
+    if not py_wb.Property().existProperty(label):
+        prop = py_wb.Property().create(label, data_type=type)
+        prop.description.set(description, language=py_wb.language)
     
-    return prop.entity_id
+        return prop.entity_id
+    
+    else: raise Exception("Property already exists")
+    
 
 def main(argv):
     

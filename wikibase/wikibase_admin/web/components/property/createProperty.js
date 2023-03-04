@@ -10,6 +10,8 @@ export function createProperty() {
     const description = getElementText("#creation-description");
     const type = getElementText("#creation-type");
 
+    if (!canCreateProperty(label, description)) return;
+
     createNewProperty(label, description, type)
         .then((id) => {
             const propertyList = document.querySelector('#property-names');
@@ -49,7 +51,7 @@ export function createProperty() {
             });
 
             propertyList.appendChild(li);
-            
+
             // Scroll to the position of the li
             li.scrollIntoView({ behavior: "smooth" });
             li.click();
@@ -57,8 +59,24 @@ export function createProperty() {
             showElement('#property-details');
 
         }).catch((error) => {
-            console.log(error);
+            console.warn(error.errorText.toString().split("'")[1]);
+            window.alert(errorText.toString().split("'")[1]);
         });
+}
+
+function canCreateProperty(label, description) {
+    if (label === titleOriginalContent || description === descriptionOriginalContent) {
+        window.alert("Set the label and the desctiption.");
+        console.warn("Set the label and the desctiption.");
+        return false;
+    }
+    else if (label === description) {
+        window.alert("The label and the description should be different.");
+        console.warn("The label and the description should be different.");
+        return false;
+    }
+
+    return true;
 }
 
 function getElementText(selector) {
