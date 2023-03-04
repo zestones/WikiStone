@@ -60,8 +60,10 @@ def updateProperty(id, label, description):
     
 def main(argv):
     
+    # Launching the app in the browser
     if '-w' in argv or '--web' in argv:
-        eel.start('index.html', mode='electron .')
+        eel.start('index.html', mode='chrome-app', port=8000)
+    # Launching the app as a desktop app
     elif '-a' in argv or '--app' in argv:
         eel.start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron.exe', '.'])
     else:
