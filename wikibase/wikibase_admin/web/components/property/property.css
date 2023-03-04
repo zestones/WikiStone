@@ -160,9 +160,37 @@
     height: 44px;
     margin: 0 auto;
     display: block;
+    margin-top: 22px;
 }
 
 .create-property-btn:hover {
     cursor: pointer;
     background-color: #1e7e34;
+}
+
+#creation-type {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    background: #1e1e1e;
+    color: white;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+#creation-type:focus {
+    border-bottom: none;
+}
+
+/* style all options */
+#creation-type option {
+    padding: 8px;
+}
+
+/* style the selected option */
+#creation-type option:checked {
+    background-color: #0062cc;
+    color: #fff;
 }

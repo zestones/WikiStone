@@ -1,3 +1,4 @@
+import { createProperty } from "./createProperty.js";
 import { displayProperties } from "./displayProperty.js";
 
 class SPARQLQueryDispatcher {

@@ -8,7 +8,11 @@ export function displayCreation() {
 export function createProperty() {
     const label = getElementText("#creation-title");
     const description = getElementText("#creation-description");
-    const type = getElementText("#creation-type");
+
+    const selectedType = document.querySelector('#creation-type');
+
+    // get the selected value
+    const type = selectedType.value;
 
     if (!canCreateProperty(label, description)) return;
 
@@ -26,7 +30,6 @@ export function createProperty() {
             // remove content of creation
             document.querySelector("#creation-title").innerHTML = "Enter a Title";
             document.querySelector("#creation-description").innerHTML = "Enter a Description";
-            document.querySelector("#creation-type").innerHTML = "Enter a Type";
 
             li.textContent = id + ` (${label})`;
 
@@ -95,15 +98,31 @@ async function createNewProperty(label, description, type) {
     return await eel.createProperty(label, description, type)();
 }
 
+async function retrievePropertyType() {
+    return await eel.retrievePropertyType()();
+}
+
+const select = document.querySelector('#creation-type');
+retrievePropertyType().then((types) => {
+    console.log(types)
+    for (const type of types) {
+        const option = document.createElement('option');
+
+        option.value = type;
+        option.textContent = type;
+
+        select.appendChild(option);
+    }
+});
+
+
 // Get the elements
 const titleElement = document.querySelector("#creation-title");
 const descriptionElement = document.querySelector("#creation-description");
-const typeElement = document.querySelector("#creation-type");
 
 // Store the original content of each element
 const titleOriginalContent = titleElement.innerHTML;
 const descriptionOriginalContent = descriptionElement.innerHTML;
-const typeOriginalContent = typeElement.innerHTML;
 
 function updateEditableContent(element, content) {
     if (element.innerHTML === "") element.innerHTML = content;
@@ -122,10 +141,6 @@ descriptionElement.addEventListener("blur", function () {
     updateEditableContent(descriptionElement, descriptionOriginalContent);
 });
 
-typeElement.addEventListener("blur", function () {
-    updateEditableContent(typeElement, typeOriginalContent);
-});
-
 
 // Add focus event listeners
 titleElement.addEventListener("focus", function () {
@@ -134,8 +149,4 @@ titleElement.addEventListener("focus", function () {
 
 descriptionElement.addEventListener("focus", function () {
     clearEditableContent(descriptionElement, descriptionOriginalContent);
-});
-
-typeElement.addEventListener("focus", function () {
-    clearEditableContent(typeElement, typeOriginalContent);
 });

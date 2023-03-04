@@ -23,8 +23,12 @@
         <div id="property-creation">
           <h2 id="creation-title" contenteditable>Enter a Title</h2>
           <p id="creation-description" contenteditable>Enter a Description</p>
-          <p id="creation-type" contenteditable>Enter a Type</p>
-          <button class="create-property-btn" onclick="createProperty()">Create Property</button>
+          <select id="creation-type">
+            <option>Select a type</option>
+          </select>
+          <button class="create-property-btn" onclick="createProperty()">
+            Create Property
+          </button>
         </div>
       </div>
       <div class="create-property">

@@ -7,6 +7,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from wikibase_request_api.python_wikibase import PyWikibase
+from wikibase_injector.data_formatter.label_properties import *
 from wikibase_injector.data_injector.wiki_injector import inject_data
 import wikibase_injector.data_formatter.data_culture_api as data_culture_api
 import wikibase_injector.data_formatter.data_clic_csv as data_clic_csv
@@ -73,6 +74,9 @@ def createProperty(label, description, type):
     
     else: raise Exception("Property already exists")
     
+@eel.expose
+def retrievePropertyType():
+    return [TYPE_STRING, TYPE_COORDINATE, TYPE_URL]
 
 def main(argv):
     
