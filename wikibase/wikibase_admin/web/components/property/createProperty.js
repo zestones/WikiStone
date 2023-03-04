@@ -104,7 +104,6 @@ async function retrievePropertyType() {
 
 const select = document.querySelector('#creation-type');
 retrievePropertyType().then((types) => {
-    console.log(types)
     for (const type of types) {
         const option = document.createElement('option');
 
@@ -114,7 +113,6 @@ retrievePropertyType().then((types) => {
         select.appendChild(option);
     }
 });
-
 
 // Get the elements
 const titleElement = document.querySelector("#creation-title");
