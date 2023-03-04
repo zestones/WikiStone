@@ -15,7 +15,10 @@ class ComponentLoader {
             .then(response => response.text())
             .then(data => {
                 this.htmlContent = data;
-                this.element.innerHTML = data;
+                const parser = new DOMParser();
+                const htmlDoc = parser.parseFromString(data, 'text/html');
+                const componentContent = htmlDoc.querySelector(`#${this.elementId}`).innerHTML;
+                this.element.innerHTML = componentContent;
             })
             .catch(error => console.error(error));
     }
@@ -38,20 +41,36 @@ class ComponentLoader {
 
         const parser = new DOMParser();
         const html = parser.parseFromString(this.htmlContent, 'text/html');
-        const body = html.querySelector('body');
         const scripts = html.querySelectorAll('script');
 
         scripts.forEach(script => {
             const scriptTag = document.createElement('script');
             scriptTag.type = script.type;
-            
+
             if (script.src) scriptTag.src = script.src;
             else scriptTag.textContent = script.textContent;
-            
+
             document.body.appendChild(scriptTag);
         });
     }
 
+    loadStyles() {
+        if (!this.htmlContent) {
+            console.error('HTML content not loaded yet.');
+            return;
+        }
+
+        const parser = new DOMParser();
+        const html = parser.parseFromString(this.htmlContent, 'text/html');
+        const styles = html.querySelectorAll('link[rel="stylesheet"]');
+
+        styles.forEach(style => {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = style.href;
+            document.head.appendChild(link);
+        });
+    }
 }
 
 
@@ -67,7 +86,10 @@ export const loaders = tabs.map(tab => new ComponentLoader(tab.id, tab.path));
 export const tabsElements = tabs.map(tab => document.querySelector(`#${tab.tabId}`));
 
 Promise.all(loaders.map(loader => loader.loadComponent())).then(() => {
-    loaders.forEach(loader => loader.loadScripts());
+    loaders.forEach(loader => {
+        loader.loadScripts();
+        loader.loadStyles();
+    });
 });
 
 function hideAllComponents() {
