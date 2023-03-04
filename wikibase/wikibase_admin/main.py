@@ -57,7 +57,12 @@ def updateProperty(id, label, description):
     
     prop.label.set(label, language=py_wb.language)
     prop.description.set(description, language=py_wb.language)
-    
+
+@eel.expose
+def deleteProperty(id):
+    prop = py_wb.Property().get(entity_id=id)
+    prop.delete()
+
 def main(argv):
     
     # Launching the app in the browser
