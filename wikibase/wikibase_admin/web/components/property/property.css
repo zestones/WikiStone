@@ -47,6 +47,20 @@
     background-color: #1e1e1e;
 }
 
+#property-title,
+#property-description {
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#property-title:focus,
+#property-description:focus {
+    outline: none;
+    border-color: #0069d9;
+}
+
+
 #property-details {
     width: 60%;
 }
@@ -64,4 +78,25 @@
 #property-type {
     font-size: 16px;
     font-style: italic;
+}
+
+.btn-modify {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #000;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.btn-modify:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+    color: #fff;
+}
+
+.btn-modify:focus {
+    outline: none;
 }

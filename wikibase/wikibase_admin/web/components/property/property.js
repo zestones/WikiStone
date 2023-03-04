@@ -64,6 +64,13 @@ function displayProperties(properties) {
     const propertyNames = Object.keys(properties);
     const propertyList = document.querySelector('#property-names');
 
+    if (propertyNames.length === 0) {
+        console.warn('No properties found.');
+        return;
+    }
+
+    const firstPropertyName = propertyNames[0];
+
     propertyNames.forEach(name => {
         const li = document.createElement('li');
         li.textContent = name + ` (${properties[name].label})`;
@@ -75,14 +82,21 @@ function displayProperties(properties) {
             }
             // add active class to the clicked item
             li.classList.add('active');
-            displayPropertyDetails(properties[name]);
+            displayPropertyDetails(properties, name);
         });
+
         propertyList.appendChild(li);
     });
+
+    // add active class to the first item
+    propertyList.querySelector(`li:first-child`).classList.add('active');
+    displayPropertyDetails(properties, firstPropertyName);
 }
 
 
-function displayPropertyDetails(property) {
+function displayPropertyDetails(properties, name) {
+    const property = properties[name];
+
     const propertyTitle = document.querySelector('#property-title');
     propertyTitle.textContent = property.label;
 
@@ -94,4 +108,41 @@ function displayPropertyDetails(property) {
 
     const propertyDetails = document.querySelector('#property-details');
     propertyDetails.style.display = 'block';
+
+    // Check if a modify button already exists
+    const existingModifyButton = document.querySelector('.btn-modify');
+    if (existingModifyButton) {
+        existingModifyButton.remove();
+    }
+
+    const modifyButton = document.createElement('button');
+    modifyButton.innerHTML = '<i class="fas fa-edit"></i>Modify';
+    modifyButton.classList.add('btn-modify');
+    modifyButton.onclick = () => {
+        console.log(`Modify button clicked for property with ID: ${name}`);
+        // Add your code to modify the property here
+        const newLabel = propertyTitle.textContent;
+        const newDescription = propertyDescription.textContent;
+
+        // Call a function to update the property with the new details
+        updateProperty(name, newLabel, newDescription);
+        // Update the fields
+        propertyTitle.textContent = newLabel;
+        propertyDescription.textContent = newDescription;
+        
+        // Update the data Object
+        properties[name].label = newLabel;
+        properties[name].description = newDescription;
+
+        // Update the label
+        const propertyList = document.querySelector('#property-names');
+        let activeItem = propertyList.querySelector('.active');
+        activeItem.textContent = name + ` (${properties[name].label})`;
+    };
+    propertyDetails.appendChild(modifyButton);
+}
+
+
+async function updateProperty(id, label, description) {
+    await eel.updateProperty(id, label, description)();
 }

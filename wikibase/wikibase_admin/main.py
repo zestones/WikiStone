@@ -51,7 +51,13 @@ def process_web_data():
     properties, data = data_loire_web.retrieve_data()
     inject_data(py_wb, data, properties)
 
-
+@eel.expose
+def updateProperty(id, label, description): 
+    prop = py_wb.Property().get(entity_id=id)
+    
+    prop.label.set(label, language=py_wb.language)
+    prop.description.set(description, language=py_wb.language)
+    
 def main(argv):
     
     if '-w' in argv or '--web' in argv:
