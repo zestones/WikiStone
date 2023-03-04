@@ -1,0 +1,196 @@
+.property-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 80px;
+}
+
+#property-names {
+    width: 30%;
+    list-style-type: none;
+    overflow-y: auto;
+    max-height: 450px;
+    direction: rtl;
+    margin: 3px;
+    background: #333333;
+    border-radius: 3px;
+    padding-right: 0px;
+}
+
+#property-names::-webkit-scrollbar {
+    width: 8px;
+}
+
+#property-names::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+}
+
+#property-names::-webkit-scrollbar-thumb {
+    background-color: rgb(51 51 51 / 73%);
+}
+
+#property-names::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
+}
+
+#property-names li {
+    cursor: pointer;
+    padding: 10px;
+    padding-left: 22px;
+}
+
+#property-names li:hover {
+    background-color: #1e1e1e;
+}
+
+#property-names .active {
+    background-color: #1e1e1e;
+}
+
+#property-title,
+#creation-title,
+#property-description,
+#creation-description,
+#creation-type {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#property-title:focus,
+#creation-title:focus,
+#property-description:focus,
+#creation-description:focus,
+#creation-type:focus {
+    outline: none;
+    border-color: #0069d9;
+}
+
+
+#property-details,
+#property-creation {
+    width: 60%;
+    position: relative;
+}
+
+#property-title,
+#creation-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#property-description,
+#creation-description {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+#property-type,
+#creation-type,
+#creation-type {
+    font-size: 16px;
+    font-style: italic;
+}
+
+.btn-modify {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #000;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.btn-modify:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+    color: #fff;
+}
+
+.btn-modify:focus,
+.btn-delete:focus {
+    outline: none;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 0.55rem 0.75rem;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+#new-property-btn {
+    width: 100%;
+    background: #007bff;
+    outline: none;
+    border: none;
+    color: #fff;
+    height: 44px;
+    margin-left: 3px;
+    margin-top: -2px;
+}
+
+#new-property-btn:hover {
+    cursor: pointer;
+    background-color: #0062cc;
+}
+
+.create-property {
+    width: 30%;
+}
+
+.create-property-btn {
+    width: 65%;
+    background: #28a745;
+    outline: none;
+    border: none;
+    color: #fff;
+    height: 44px;
+    margin: 0 auto;
+    display: block;
+    margin-top: 22px;
+}
+
+.create-property-btn:hover {
+    cursor: pointer;
+    background-color: #1e7e34;
+}
+
+#creation-type {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    background: #1e1e1e;
+    color: white;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+#creation-type:focus {
+    border-bottom: none;
+}
+
+/* style all options */
+#creation-type option {
+    padding: 8px;
+}
+
+/* style the selected option */
+#creation-type option:checked {
+    background-color: #0062cc;
+    color: #fff;
+}

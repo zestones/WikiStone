@@ -7,6 +7,7 @@ import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from wikibase_request_api.python_wikibase import PyWikibase
+from wikibase_injector.data_formatter.label_properties import *
 from wikibase_injector.data_injector.wiki_injector import inject_data
 import wikibase_injector.data_formatter.data_culture_api as data_culture_api
 import wikibase_injector.data_formatter.data_clic_csv as data_clic_csv
@@ -51,11 +52,38 @@ def process_web_data():
     properties, data = data_loire_web.retrieve_data()
     inject_data(py_wb, data, properties)
 
+@eel.expose
+def updateProperty(id, label, description): 
+    prop = py_wb.Property().get(entity_id=id)
+    
+    prop.label.set(label, language=py_wb.language)
+    prop.description.set(description, language=py_wb.language)
+
+@eel.expose
+def deleteProperty(id):
+    prop = py_wb.Property().get(entity_id=id)
+    prop.delete()
+    
+@eel.expose
+def createProperty(label, description, type):
+    if not py_wb.Property().existProperty(label):
+        prop = py_wb.Property().create(label, data_type=type)
+        prop.description.set(description, language=py_wb.language)
+    
+        return prop.entity_id
+    
+    else: raise Exception("Property already exists")
+    
+@eel.expose
+def retrievePropertyType():
+    return [TYPE_STRING, TYPE_COORDINATE, TYPE_URL]
 
 def main(argv):
     
+    # Launching the app in the browser
     if '-w' in argv or '--web' in argv:
-        eel.start('index.html', mode='electron .')
+        eel.start('index.html', mode='chrome-app', port=8000)
+    # Launching the app as a desktop app
     elif '-a' in argv or '--app' in argv:
         eel.start('index.html', mode='custom', cmdline_args=['node_modules/electron/dist/electron.exe', '.'])
     else:

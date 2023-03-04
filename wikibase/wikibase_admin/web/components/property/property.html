@@ -8,13 +8,34 @@
   </head>
   <body>
     <div class="page-content" id="property">
-      <h1>Contenu de l'onglet property</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima nam
-        incidunt ut maxime laudantium earum quia architecto deleniti laborum
-        dolorum quasi harum eum velit impedit consequuntur, possimus blanditiis
-        adipisci quam!
-      </p>
+      <h1>Property</h1>
+      <div class="property-list">
+        <ul id="property-names">
+          <!-- Property names will be added dynamically -->
+        </ul>
+
+        <div id="property-details">
+          <h2 id="property-title" contenteditable></h2>
+          <p id="property-description" contenteditable></p>
+          <p id="property-type"></p>
+        </div>
+
+        <div id="property-creation">
+          <h2 id="creation-title" contenteditable>Enter a Title</h2>
+          <p id="creation-description" contenteditable>Enter a Description</p>
+          <select id="creation-type">
+            <option>Select a type</option>
+          </select>
+          <button class="create-property-btn" onclick="createProperty()">
+            Create Property
+          </button>
+        </div>
+      </div>
+      <div class="create-property">
+        <button id="new-property-btn" onclick="displayCreation()">
+          New Property
+        </button>
+      </div>
     </div>
   </body>
 </html>
