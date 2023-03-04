@@ -62,6 +62,13 @@ def updateProperty(id, label, description):
 def deleteProperty(id):
     prop = py_wb.Property().get(entity_id=id)
     prop.delete()
+    
+@eel.expose
+def createProperty(label, description, type):
+    prop = py_wb.Property().create(label, data_type=type)
+    prop.description.set(description, language=py_wb.language)
+    
+    return prop.entity_id
 
 def main(argv):
     

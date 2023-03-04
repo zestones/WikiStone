@@ -48,35 +48,46 @@
 }
 
 #property-title,
-#property-description {
+#creation-title,
+#property-description,
+#creation-description,
+#creation-type {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
 }
 
 #property-title:focus,
-#property-description:focus {
+#creation-title:focus,
+#property-description:focus,
+#creation-description:focus,
+#creation-type:focus {
     outline: none;
     border-color: #0069d9;
 }
 
 
-#property-details {
+#property-details,
+#property-creation {
     width: 60%;
     position: relative;
 }
 
-#property-title {
+#property-title,
+#creation-title {
     font-size: 24px;
     margin-bottom: 10px;
 }
 
-#property-description {
+#property-description,
+#creation-description {
     font-size: 16px;
     margin-bottom: 10px;
 }
 
-#property-type {
+#property-type,
+#creation-type,
+#creation-type {
     font-size: 16px;
     font-style: italic;
 }
@@ -118,4 +129,40 @@
 
 .btn-delete:hover {
     background-color: #c82333;
+}
+
+#new-property-btn {
+    width: 100%;
+    background: #007bff;
+    outline: none;
+    border: none;
+    color: #fff;
+    height: 44px;
+    margin-left: 3px;
+    margin-top: -2px;
+}
+
+#new-property-btn:hover {
+    cursor: pointer;
+    background-color: #0062cc;
+}
+
+.create-property {
+    width: 30%;
+}
+
+.create-property-btn {
+    width: 65%;
+    background: #28a745;
+    outline: none;
+    border: none;
+    color: #fff;
+    height: 44px;
+    margin: 0 auto;
+    display: block;
+}
+
+.create-property-btn:hover {
+    cursor: pointer;
+    background-color: #1e7e34;
 }

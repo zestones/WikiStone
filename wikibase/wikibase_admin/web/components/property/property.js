@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 });
 
+
 export async function updateProperty(id, label, description) {
     await eel.updateProperty(id, label, description)();
 }

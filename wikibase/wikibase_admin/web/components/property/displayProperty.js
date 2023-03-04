@@ -20,6 +20,9 @@ export function displayProperties(properties) {
             const activeItem = propertyList.querySelector('.active');
             if (activeItem) activeItem.classList.remove('active');
 
+            // Hide creation
+            document.querySelector("#property-creation").style.display = "none";
+
             // add active class to the clicked item
             li.classList.add('active');
             displayPropertyDetails(properties, name);
@@ -30,11 +33,15 @@ export function displayProperties(properties) {
 
     // add active class to the first item
     propertyList.querySelector(`li:first-child`).classList.add('active');
+
+    // Hide creation
+    document.querySelector("#property-creation").style.display = "none";
     displayPropertyDetails(properties, firstPropertyName);
 }
 
-function displayPropertyDetails(properties, name) {
+export function displayPropertyDetails(properties, name) {
     const property = properties[name];
+
     updateElementText('#property-title', property.label);
     updateElementText('#property-description', property.description);
     updateElementText('#property-type', `Type: ${property.type}`);
@@ -67,14 +74,31 @@ function displayPropertyDetails(properties, name) {
     replaceOrAddButton('.btn-delete', 'delete', () => {
         // Ask for confirmation before deleting the property
         const confirmDelete = confirm('Are you sure you want to delete this property?');
-        
+
         if (confirmDelete) {
             // Call a function to delete the property
             deleteProperty(name);
 
             // delete the property details
-            deleteElement('#property-details');
             deleteElement('#property-names li.active');
+            const propertyList = document.querySelector('#property-names');
+
+            // add active class to the first item
+            const firstProperty = propertyList.querySelector("li:first-child");
+            firstProperty.click();
+
+            // scroll to top of the propertyList with animation
+            const scrollTop = () => {
+                const currentPosition = propertyList.scrollTop;
+                if (currentPosition > 0) {
+                    window.requestAnimationFrame(scrollTop);
+                    propertyList.scrollTop = currentPosition - currentPosition / 10;
+                }
+            }
+
+            scrollTop();
+
+            document.querySelector("#property-details").style.display = "block";
         }
     });
 }

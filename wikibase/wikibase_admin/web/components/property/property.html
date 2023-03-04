@@ -13,11 +13,24 @@
         <ul id="property-names">
           <!-- Property names will be added dynamically -->
         </ul>
+
         <div id="property-details">
-          <h2 id="property-title" contentEditable></h2>
-          <p id="property-description" contentEditable></p>
+          <h2 id="property-title" contenteditable></h2>
+          <p id="property-description" contenteditable></p>
           <p id="property-type"></p>
-        </div>        
+        </div>
+
+        <div id="property-creation">
+          <h2 id="creation-title" contenteditable>Enter a Title</h2>
+          <p id="creation-description" contenteditable>Enter a Description</p>
+          <p id="creation-type" contenteditable>Enter a Type</p>
+          <button class="create-property-btn" onclick="createProperty()">Create Property</button>
+        </div>
+      </div>
+      <div class="create-property">
+        <button id="new-property-btn" onclick="displayCreation()">
+          New Property
+        </button>
       </div>
     </div>
   </body>
