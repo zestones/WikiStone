@@ -52,31 +52,35 @@ document.addEventListener('DOMContentLoaded', () => {
     queryDispatcher.query(sparqlQuery)
         .then((data) => {
             const parsedData = queryDispatcher.parse(data);
-            console.log(parsedData);
-
-            console.log("loaded")
-            displayProperties(parsedData);
+            setTimeout(() => displayProperties(parsedData), 100);
         })
         .catch((error) => {
             console.log('error' + error);
         });
 });
+
+
 function displayProperties(properties) {
     const propertyNames = Object.keys(properties);
-    console.log("here")
-
     const propertyList = document.querySelector('#property-names');
-    console.log(propertyList)
 
     propertyNames.forEach(name => {
         const li = document.createElement('li');
-        li.textContent = name;
+        li.textContent = name + ` (${properties[name].label})`;
         li.addEventListener('click', () => {
+            // remove active class from any existing active list item
+            const activeItem = propertyList.querySelector('.active');
+            if (activeItem) {
+                activeItem.classList.remove('active');
+            }
+            // add active class to the clicked item
+            li.classList.add('active');
             displayPropertyDetails(properties[name]);
         });
         propertyList.appendChild(li);
     });
 }
+
 
 function displayPropertyDetails(property) {
     const propertyTitle = document.querySelector('#property-title');
