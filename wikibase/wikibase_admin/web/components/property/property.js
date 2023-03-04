@@ -49,18 +49,17 @@ function searchAllProrperties() {
     return sparqlQuery;
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const sparqlQuery = searchAllProrperties();
-    const queryDispatcher = new SPARQLQueryDispatcher();
-    queryDispatcher.query(sparqlQuery)
-        .then((data) => {
-            const parsedData = queryDispatcher.parse(data);
-            setTimeout(() => displayProperties(parsedData), 100);
-        })
-        .catch((error) => {
-            console.log('error' + error);
-        });
-});
+const sparqlQuery = searchAllProrperties();
+const queryDispatcher = new SPARQLQueryDispatcher();
+queryDispatcher.query(sparqlQuery)
+    .then((data) => {
+        const parsedData = queryDispatcher.parse(data);
+        displayProperties(parsedData);
+    })
+    .catch((error) => {
+        console.log('error' + error);
+    });
+
 
 
 export async function updateProperty(id, label, description) {
