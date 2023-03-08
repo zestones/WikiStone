@@ -1,6 +1,7 @@
 from wikibase_injector.data_formatter.label_properties import *
 import textwrap
 import csv
+import os 
 
 # The proprties name and value
 properties = {
@@ -38,10 +39,16 @@ mapping = {
 }
 
 
-def retrieve_data(): 
+def retrieve_data(file_path="../../data/monuments_historiques_departement42_2023-02-11.csv"): 
+    # get the current working directory
+    current_path = os.getcwd()
+
+    # print the current path
+    print("Current Path:", current_path)
+    
     # Open the CSV file and read the data
     monuments = []
-    with open("../../data/monuments_historiques_departement42_2023-02-11.csv", "r", encoding="utf-8") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         for row in reader:
             # Extract the relevant data using the updated properties mapping
