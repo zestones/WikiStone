@@ -1,10 +1,13 @@
 import os
 import sys
 import getopt
+import nbimporter
 from colorama import Style, Fore
 
 # add the parent directory of main.py to Python path to enable import modules from the wikibase package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# from wikibase_injector.classifier.classify_data import predict_labels_decisiontree
 
 from wikibase_request_api.python_wikibase import PyWikibase
 from wikibase_injector.data_injector.wiki_injector import inject_data
@@ -39,7 +42,8 @@ def print_process(title, source):
 def process_api_data(py_wb):
     print_process("API", "https://data.culture.gouv.fr/")
     properties, data = data_culture_api.retrieve_data()
-    inject_data(py_wb, data, properties)
+    
+    # inject_data(py_wb, data, properties)
 
 
 # retrieve the data from the csv : https://dataclic.fr/
