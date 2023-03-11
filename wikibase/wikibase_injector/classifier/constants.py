@@ -20,7 +20,7 @@ LABELS_NAMES = {
     0: "Château",
     1: "Eglise",
     2: "Maison",
-    3: "Viaduc",
+    3: "Autre",
     4: "Croix",
     6: "Chapelle",
     7: "Immeuble",
@@ -31,5 +31,7 @@ LABELS_NAMES = {
     13: "Musée",
     14: "Ferme"
 }
+
+CATEGORIES = list(LABELS_NAMES.values())
 
 vectorizer = CountVectorizer()

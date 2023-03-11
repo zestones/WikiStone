@@ -18,6 +18,7 @@ properties = {
     PROP_HISTORIQUE[LABEL]: PROP_HISTORIQUE,
     PROP_CONTACT[LABEL]: PROP_CONTACT,
     PROP_LOCATION[LABEL]: PROP_LOCATION,
+    PROP_CATEGORY[LABEL]: PROP_CATEGORY
 }
 
 # A mapping dictionary for the updated property names

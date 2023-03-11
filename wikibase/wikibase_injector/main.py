@@ -2,8 +2,8 @@ import os
 import sys
 import getopt
 import nbimporter
+import colorama
 from colorama import Style, Fore
-import json
 
 # add the parent directory of main.py to Python path to enable import modules from the wikibase package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -17,6 +17,8 @@ import wikibase_injector.data_formatter.data_culture_api as data_culture_api
 import wikibase_injector.data_formatter.data_clic_csv as data_clic_csv
 import wikibase_injector.data_formatter.data_loire_web as data_loire_web
 
+# Initialize colorama
+colorama.init()
 
 # Display program usage
 def usage(program_name):
@@ -38,8 +40,8 @@ def print_process(title, source):
     print(Fore.RED + "+" * 75)
     print(Fore.GREEN + "> {:^75}".format(title.upper() + " SOURCE : " + source))
     print(Fore.RED + "+" * 75, end="\n\n" + Fore.RESET)
-
-
+   
+    
 # retrieve the data from the api : https://data.culture.gouv.fr/
 def process_api_data(py_wb):
     print_process("API", "https://data.culture.gouv.fr/")
@@ -47,19 +49,25 @@ def process_api_data(py_wb):
     inject_data(py_wb, data, properties)
     
 
-# retrieve the data from the csv : https://dataclic.fr/
 def process_csv_data(py_wb):
     print_process("CSV", "https://dataclic.fr/")
     properties, data = data_clic_csv.retrieve_data()
-    data = predict_monuments_category(data)
-    print(json.dumps(data, indent=2))
-    inject_data(py_wb, data, properties)    
 
+    print(f"{Style.BRIGHT}{Fore.CYAN}\rClassifying")
+    data = predict_monuments_category(data)
+    print(f"{Style.BRIGHT}{Fore.CYAN}\rClassifying {Fore.GREEN}Done !")
+
+    inject_data(py_wb, data, properties)
 
 # retrieve the data from the web : https://www.loire.fr/ 
 def process_web_data(py_wb):
     print_process("SCRAP", "https://www.loire.fr/")
     properties, data = data_loire_web.retrieve_data()
+    
+    print(f"{Style.BRIGHT}{Fore.CYAN}\rClassifying")
+    data = predict_monuments_category(data)
+    print(f"{Style.BRIGHT}{Fore.CYAN}\rClassifying {Fore.GREEN}Done !")
+    
     inject_data(py_wb, data, properties)
     
 
