@@ -1,4 +1,5 @@
 import { setRadiusMap } from "../map/map-slider.js";
+import { API_KEY } from "./adresse-search.js";
 
 function convertToPositions(data) {
     const positions = [];
@@ -26,7 +27,7 @@ function setMap() {
 
     // Initialize place search with options
     placeSearch({
-        key: "ck2OXUAJsF0iz999XGQ62jyXo8AXOVp7",
+        key: API_KEY,
         container: document.querySelector("#search-input"),
         useDeviceLocation: true,
         collection: ["poi", "airport", "address", "adminArea"],
@@ -75,7 +76,6 @@ function setUserMap(map, userPosition, positions) {
             changePositionBtn.classList.add("change-position");
         }
     });
-
 }
 
 const changePositionBtn = document.getElementById("change-position-btn");

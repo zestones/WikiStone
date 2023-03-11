@@ -2,6 +2,8 @@ import { retrieveData, parseData } from "../map/retrieve-map-data.js";
 import { setMap, setUserMap, convertToPositions } from "../map/map-config.js";
 import { setRadiusMap, displayAllLocation } from "../map/map-slider.js";
 
+let positions;
+const map = setMap();
 
 // Retrieve the user's location and display it on the map
 navigator.geolocation.getCurrentPosition(function (position) {
@@ -10,10 +12,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
 
     // Retrieve the data and convert it to positions
     retrieveData().then(data => {
-        const positions = convertToPositions(parseData(data))
-
-        // Display the map with the user's position and the retrieved positions
-        const map = setMap();
+        positions = convertToPositions(parseData(data))
 
         setUserMap(map, userPosition, positions);
         setRadiusMap(map, userPosition, positions);
@@ -39,12 +38,11 @@ navigator.geolocation.getCurrentPosition(function (position) {
 
     // Retrieve the data and convert it to positions
     retrieveData().then(data => {
-        const positions = convertToPositions(parseData(data));
-
-        // Display the map with the user's position and the retrieved positions
-        const map = setMap();
+        positions = convertToPositions(parseData(data));
         displayAllLocation(map, positions);
 
         numberResult.innerHTML = (positions.length - 1) + ' ' + 'Results';
     });
 });
+
+export { positions, map };
