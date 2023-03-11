@@ -21,12 +21,18 @@
       type="text/css"
       href="{{ url_for('static', filename='css/search-results.css') }}"
     />
+    <script src="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.js"></script>
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://api.mqcdn.com/sdk/place-search-js/v1.0.0/place-search.css"
+    />
   </head>
   <body>
     <section class="search-section">
       <div class="section-container">
         <h1 onclick="window.location.href='/'">WikiStone</h1>
-        <hr>
+        <hr />
         <div class="search-config">
           <label for="radius-slider">Search radius</label>
           <input
@@ -58,6 +64,9 @@
     <div id="map-container">
       <div id="map">
         <div id="change-position-btn" class="btn">Change Position</div>
+        <div id="search-container" class="search-container">
+          <input type="search" id="search-input" placeholder="Start Searching..." />
+        </div>
       </div>
     </div>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
