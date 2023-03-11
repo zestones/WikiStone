@@ -20,7 +20,7 @@ DEFAULT_CONFIG = {
     "oauth_credentials": {},
     "login_credentials": {
 		"botUsername": "Admin@botstone",
-		"botPassword": "npfvu2i9q3i085300nbujs1lo8o8cddv"
+		"botPassword": "i64r0f9ujvu780cd27sovvf19ds4pige"
 	},
 	"is_bot": True,
 	"summary": "Modified using python-wikibase"

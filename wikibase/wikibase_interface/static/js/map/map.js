@@ -15,7 +15,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
         // Display the map with the user's position and the retrieved positions
         const map = setMap();
 
-        setUserMap(map, userPosition);
+        setUserMap(map, userPosition, positions);
         setRadiusMap(map, userPosition, positions);
     });
 
