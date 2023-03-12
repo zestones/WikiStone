@@ -1,9 +1,0 @@
-{
-	"apiUrl": "http://localhost/w/api.php",
-    "loginCredentials": {
-		"botUsername": "Admin@botstone",
-		"botPassword": "i64r0f9ujvu780cd27sovvf19ds4pige"
-	},
-	"isBot": true,
-	"summary": "Modified using python-wikibase"
-}

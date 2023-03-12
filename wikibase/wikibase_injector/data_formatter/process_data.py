@@ -5,7 +5,6 @@ import threading
 import colorama
 import time
 import sys
-import os
 
 
 from wikibase_injector.data_formatter.formatter.data_culture_api import retrieve_data as api_retrieve_data 
