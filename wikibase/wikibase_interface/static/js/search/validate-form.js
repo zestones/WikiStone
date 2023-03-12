@@ -1,7 +1,7 @@
 export function validateForm(formData) {
 
     // Check if no search criteria have been provided
-    if (!formData.query && !formData.city && !formData.postalCode && !formData.region) {
+    if (!formData.query && !formData.city && !formData.postalCode && !formData.region && !formData.category) {
 
         // Display error message
         const errorMessage = document.getElementById('error-message');

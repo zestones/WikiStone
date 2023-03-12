@@ -106,18 +106,13 @@ const searchInput = document.querySelector('#search-input');
 // Add a mousedown event listener to the search container to prevent the event from propagating to the map
 searchContainer.addEventListener('mousedown', function (e) {
     // Check if the target element of the event is the input element or the dropdown menu
-    if (
-        e.target === searchInput ||
-        e.target.parentNode.id === 'mq-place-search-listbox-0'
-    ) {
+    if (e.target === searchInput || e.target.parentNode.id === 'mq-place-search-listbox-0') {
         // Stop the event propagation
         e.stopPropagation();
-        // Allow the default behavior of the mousedown event to happen
-        return true;
+
     } else {
         // Stop the event propagation
         e.stopPropagation();
-        return false;
     }
 });
 
