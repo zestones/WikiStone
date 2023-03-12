@@ -1,4 +1,4 @@
-import { components, loaders } from '../../App.js';
+import { components, loaders } from '../../app.js';
 
 export function changePage(button) {
     loaders.forEach(loader => {

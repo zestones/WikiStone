@@ -6,3 +6,8 @@ bs4
 selenium
 eel
 scikit-learn
+nbimporter
+unidecode
+gensim
+yellowbrick
+plotly
