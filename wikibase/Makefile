@@ -35,11 +35,11 @@ help:
 	@echo "\033[1m  electron\033[0m     run the electron app\n"
 	
 	@echo "\033[34m  Options for \033[1minject:\033[0m"
-	@echo "\033[1m   -- -h --help\033[0m    show the help message"
-	@echo "\033[1m   -- -a --all\033[0m     process all data sources"
-	@echo "\033[1m   -- -c --csv\033[0m     process csv data source"
-	@echo "\033[1m   -- -j --json\033[0m    process json data source"
-	@echo "\033[1m   -- -s --csv\033[0m     process data from Web Scraping\n"
+	@echo "\033[1m   -- -h --help\033[0m      show the help message"
+	@echo "\033[1m   -- -p --process\033[0m   process all data sources"
+	@echo "\033[1m   -- -c --csv\033[0m       process csv data source (\033[1mhttps://dataclic.fr/\033[0m)"
+	@echo "\033[1m   -- -a --api\033[0m       process data from the api (\033[1mhttps://data.culture.gouv.fr/api/\033[0m)"
+	@echo "\033[1m   -- -s --scrap\033[0m     process data from Web Scraping (\033[1mhttps://www.loire.fr/\033[0m)\n"
 
 	@echo "\033[34m  Options for \033[1melectron:\033[0m"
 	@echo "\033[1m   -- -a --app\033[0m     run the desktop application"
