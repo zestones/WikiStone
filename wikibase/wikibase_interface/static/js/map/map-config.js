@@ -37,6 +37,7 @@ function setMap() {
 }
 
 let userMarker;
+let changePositionBtnListener;
 
 function setUserMap(map, userPosition, positions) {
     // Create a red icon for the user marker
@@ -56,7 +57,10 @@ function setUserMap(map, userPosition, positions) {
     userMarker = L.marker(userPosition, { icon: userIcon }).addTo(map);
     userMarker.bindPopup("Your location");
 
-    changePositionBtn.addEventListener("click", function (e) {
+    if (changePositionBtnListener) {
+        changePositionBtn.removeEventListener("click", changePositionBtnListener);
+    }
+    changePositionBtnListener = function (e) {
         e.stopPropagation();
 
         if (isChangingPosition) {
@@ -75,7 +79,8 @@ function setUserMap(map, userPosition, positions) {
             changePositionBtn.innerText = "Stop Changing";
             changePositionBtn.classList.add("change-position");
         }
-    });
+    };
+    changePositionBtn.addEventListener("click", changePositionBtnListener);
 }
 
 const changePositionBtn = document.getElementById("change-position-btn");
