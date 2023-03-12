@@ -2,25 +2,16 @@ import os
 import sys
 import getopt
 import nbimporter
-import time
 import colorama
-import threading
 from colorama import Style, Fore
 
 # add the parent directory of main.py to Python path to enable import modules from the wikibase package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from wikibase_injector.classifier.constants import *
-from wikibase_injector.classifier.classify_data import predict_monuments_category
-
 from wikibase_request_api.python_wikibase import PyWikibase
-from wikibase_injector.data_injector.wiki_injector import inject_data
-import wikibase_injector.data_formatter.data_culture_api as data_culture_api
-import wikibase_injector.data_formatter.data_clic_csv as data_clic_csv
-import wikibase_injector.data_formatter.data_loire_web as data_loire_web
-
-# Initialize colorama
-colorama.init()
+import wikibase_injector.data_formatter.data_culture_api as api
+import wikibase_injector.data_formatter.data_clic_csv as csv
+import wikibase_injector.data_formatter.data_loire_web as web
 
 # Display program usage
 def usage(program_name):
@@ -37,64 +28,6 @@ def usage(program_name):
     print("")
     sys.exit(0)
 
-
-def print_process(title, source):
-    print(Fore.RED + "+" * 75)
-    print(Fore.GREEN + "> {:^75}".format(title.upper() + " SOURCE : " + source))
-    print(Fore.RED + "+" * 75, end="\n\n" + Fore.RESET)
-   
-
-def print_classify():
-    animation = "|/-\\"
-    idx = 0
-    print(f"{Fore.CYAN}Classifying monument ", end="")
-    sys.stdout.flush()
-
-    while not event.is_set():
-        print(f"{Style.BRIGHT}{Fore.BLUE}{animation[idx]}\b", end="", flush=True)
-        idx = (idx + 1) % len(animation)
-        time.sleep(0.1)
-        
-    print(f"{Fore.GREEN}Done", end="\n")
-
-
-
-event = threading.Event()
-
-# retrieve the data from the api : https://data.culture.gouv.fr/
-def process_api_data(py_wb):
-    print_process("API", "https://data.culture.gouv.fr/")
-    properties, data = data_culture_api.retrieve_data()
-    inject_data(py_wb, data, properties)
-    
-
-def process_csv_data(py_wb):
-    print_process("CSV", "https://dataclic.fr/")
-    properties, data = data_clic_csv.retrieve_data()
-    
-    thread = threading.Thread(target=print_classify)
-    thread.start()
-    
-    data = predict_monuments_category(data)
-
-    event.set()
-    thread.join()
-    inject_data(py_wb, data, properties)
-
-# retrieve the data from the web : https://www.loire.fr/ 
-def process_web_data(py_wb):
-    print_process("SCRAP", "https://www.loire.fr/")
-    properties, data = data_loire_web.retrieve_data()
-    
-    thread = threading.Thread(target=print_classify)
-    thread.start()
-    
-    data = predict_monuments_category(data)
-    event.set()
-    thread.join()
-
-    inject_data(py_wb, data, properties)
-    
 
 # main function
 def main(argv):
@@ -115,18 +48,18 @@ def main(argv):
             usage(argv[0])
         
         elif opt in ('-p', '--process'):
-            process_api_data(py_wb)
-            process_csv_data(py_wb)
-            process_web_data(py_wb)
+            api.process_api_data(py_wb)
+            csv.process_csv_data(py_wb)
+            web.process_web_data(py_wb)
             
         elif opt in ('-a', '--api'):
-            process_api_data(py_wb)
+            api.process_api_data(py_wb)
         
         elif opt in ('-c', '--csv'):
-            process_csv_data(py_wb)
+            csv.process_csv_data(py_wb)
         
-        elif opt in ('-s', '--scrapp'):
-            process_web_data(py_wb)
+        elif opt in ('-s', '--scrap'):
+            web.process_web_data(py_wb)
         
     
 if __name__ == '__main__':
