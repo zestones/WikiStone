@@ -96,9 +96,10 @@ mapContainer.addEventListener("mousemove", function (e) {
             "url('https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png') 12 41, pointer";
     } else {
         // Change the cursor back to the default cursor
-        mapContainer.style.cursor = "default";
+        mapContainer.style.cursor = "grab";
     }
 });
+
 const searchContainer = document.querySelector('.search-container');
 const searchInput = document.querySelector('#search-input');
 
