@@ -1,6 +1,5 @@
 import requests
 from wikibase_injector.data_formatter.label_properties import *
-import wikibase_injector.data_formatter.print_process as pp
 
 # Define properties and data types
 properties = {
@@ -52,10 +51,3 @@ def retrieve_data():
     museums = construct_data_object(data)
     
     return properties, museums
-
-
-# retrieve the data from the api : https://data.culture.gouv.fr/
-def process_api_data(py_wb):
-    pp.print_process("API", "https://data.culture.gouv.fr/")
-    properties, data = retrieve_data()
-    pp.inject_data(py_wb, data, properties)

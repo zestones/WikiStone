@@ -8,7 +8,6 @@ import textwrap
 import re
 
 from wikibase_injector.data_formatter.label_properties import *
-import wikibase_injector.data_formatter.print_process as pp
 
 
 # Define properties and data types
@@ -133,18 +132,3 @@ def retrieve_data():
     # Quit the driver and return the data
     driver.quit()
     return properties, monuments
-
-
-# retrieve the data from the web : https://www.loire.fr/
-def process_web_data(py_wb):
-    pp.print_process("SCRAP", "https://www.loire.fr/")
-    properties, data = retrieve_data()
-
-    thread = pp.threading.Thread(target=pp.print_classify)
-    thread.start()
-
-    data = pp.predict_monuments_category(data)
-    pp.event.set()
-    thread.join()
-
-    pp.inject_data(py_wb, data, properties)

@@ -1,5 +1,4 @@
 from wikibase_injector.data_formatter.label_properties import *
-import wikibase_injector.data_formatter.print_process as pp
 import textwrap
 import csv
 import os
@@ -70,17 +69,3 @@ def retrieve_data(file_path="../../data/monuments_historiques_departement42_2023
             monuments.append(monument)
 
     return properties, monuments
-
-
-def process_csv_data(py_wb):
-    pp.print_process("CSV", "https://dataclic.fr/")
-    properties, data = retrieve_data()
-
-    thread = pp.threading.Thread(target=pp.print_classify)
-    thread.start()
-
-    data = pp.predict_monuments_category(data)
-
-    pp.event.set()
-    thread.join()
-    pp.inject_data(py_wb, data, properties)

@@ -1,17 +1,15 @@
-import os
-import sys
-import getopt
-import nbimporter
-import colorama
 from colorama import Style, Fore
+import getopt
+import sys
+import os
+
 
 # add the parent directory of main.py to Python path to enable import modules from the wikibase package.
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+from wikibase_injector.data_formatter.process_data import process_api_data, process_csv_data
+from wikibase_injector.data_formatter.process_data import process_web_data
 from wikibase_request_api.python_wikibase import PyWikibase
-import wikibase_injector.data_formatter.data_culture_api as api
-import wikibase_injector.data_formatter.data_clic_csv as csv
-import wikibase_injector.data_formatter.data_loire_web as web
 
 # Display program usage
 def usage(program_name):
@@ -48,18 +46,18 @@ def main(argv):
             usage(argv[0])
         
         elif opt in ('-p', '--process'):
-            api.process_api_data(py_wb)
-            csv.process_csv_data(py_wb)
-            web.process_web_data(py_wb)
+            process_api_data(py_wb)
+            process_csv_data(py_wb)
+            process_web_data(py_wb)
             
         elif opt in ('-a', '--api'):
-            api.process_api_data(py_wb)
+            process_api_data(py_wb)
         
         elif opt in ('-c', '--csv'):
-            csv.process_csv_data(py_wb)
+            process_csv_data(py_wb)
         
         elif opt in ('-s', '--scrap'):
-            web.process_web_data(py_wb)
+            process_web_data(py_wb)
         
     
 if __name__ == '__main__':
