@@ -65,23 +65,31 @@ function displayAllLocation(map, positions) {
     }
 }
 
+// Save a reference
+let circle;
+let sliderInputListener;
+let displayLocationCheckboxListener;
 
 function setRadiusMap(map, userPosition, positions) {
-    // Save a reference to the previously drawn circle
-    let circle;
-
+    // Remove the previously drawn circle, if it exists
+    if (circle) map.removeLayer(circle);
+    
     // Update the value element with the initial value
     value.innerHTML = (slider.value / 1000).toFixed(1) + " km";
     circle = createCircleRadius(slider.value, userPosition).addTo(map);
 
     const userLatLng = L.latLng(userPosition);
     updateVisibleLocation(map, positions, userLatLng);
+    
     numberResult.innerHTML = Object.keys(markers).length + ' ' + 'Results';
 
-    // Update the value element when the slider value changes
-    slider.addEventListener("input", function () {
+    // Update the slider input event listener
+    if (sliderInputListener) {
+        slider.removeEventListener("input", sliderInputListener);
+    }
+    sliderInputListener = function () {
         const radius = this.value;
-        value.innerHTML = (radius / 1000).toFixed(1) + " km";;
+        value.innerHTML = (radius / 1000).toFixed(1) + " km";
 
         // Remove the previously drawn circle, if it exists
         if (circle) map.removeLayer(circle);
@@ -93,9 +101,14 @@ function setRadiusMap(map, userPosition, positions) {
         }
 
         numberResult.innerHTML = Object.keys(markers).length + ' ' + 'Results';
-    });
+    };
+    slider.addEventListener("input", sliderInputListener);
 
-    displayLocationCheckbox.addEventListener("change", function () {
+    // Update the display location checkbox change event listener
+    if (displayLocationCheckboxListener) {
+        displayLocationCheckbox.removeEventListener("change", displayLocationCheckboxListener);
+    }
+    displayLocationCheckboxListener = function () {
         if (this.checked) {
             displayAllLocation(map, positions, userLatLng);
         } else {
@@ -103,8 +116,8 @@ function setRadiusMap(map, userPosition, positions) {
             updateVisibleLocation(map, positions, userLatLng);
         }
         numberResult.innerHTML = Object.keys(markers).length + ' ' + 'Results';
-    });
-
+    };
+    displayLocationCheckbox.addEventListener("change", displayLocationCheckboxListener);
 }
 
 // Get the slider element

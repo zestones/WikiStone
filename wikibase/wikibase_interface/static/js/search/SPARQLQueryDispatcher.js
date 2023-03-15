@@ -12,6 +12,7 @@ export default class SPARQLQueryDispatcher {
         if (formData.city) conditions.push(`?item wdt:P3 "${formData.city}".`);
         if (formData.postalCode) conditions.push(`?item wdt:P4 "${formData.postalCode}".`);
         if (formData.region) conditions.push(`?item wdt:P6 "${formData.region}".`);
+        if (formData.category) conditions.push(`?item wdt:P10 "${formData.category}".`);
 
         if (formData.query) {
             sparqlQuery += `?item rdfs:label ?itemLabel.

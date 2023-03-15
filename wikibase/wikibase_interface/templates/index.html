@@ -62,6 +62,12 @@
                     id="region"
                     placeholder="Enter a region"
                   />
+                  <select name="category" id="category">
+                    <option value="">-- Select a category --</option>
+                    {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                    {% endfor %}
+                  </select>
                 </div>
                 <div class="search-infos">
                   <button type="submit">Search</button>

@@ -1,5 +1,3 @@
-from wikibase_injector.data_formatter.label_properties import *
-
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
@@ -8,6 +6,8 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import textwrap
 import re
+
+from wikibase_injector.data_formatter.label_properties import *
 
 
 # Define properties and data types
@@ -20,7 +20,8 @@ properties = {
     PROP_REGION[LABEL]: PROP_REGION,
     PROP_LOCATION[LABEL]: PROP_LOCATION,
     PROP_ANECDOTE[LABEL]: PROP_ANECDOTE,
-    PROP_PRECISION_ON_PROTECTION[LABEL]: PROP_PRECISION_ON_PROTECTION
+    PROP_PRECISION_ON_PROTECTION[LABEL]: PROP_PRECISION_ON_PROTECTION,
+    PROP_CATEGORY[LABEL]: PROP_CATEGORY
 }
 
 
@@ -81,10 +82,12 @@ def scrap_data(soup):
             monument[PROP_POSTCODE[LABEL]] = postal_code
         if details:
             if len(details) > 400:
-                monument[PROP_PRECISION_ON_PROTECTION[LABEL]] = textwrap.wrap(details, width=400)[0]
+                monument[PROP_PRECISION_ON_PROTECTION[LABEL]
+                         ] = textwrap.wrap(details, width=400)[0]
         if comprendre:
             if len(comprendre) > 250:
-                monument[ITEM_DESCRIPTION] = textwrap.wrap(comprendre, width=250)[0]
+                monument[ITEM_DESCRIPTION] = textwrap.wrap(
+                    comprendre, width=250)[0]
         if anecdote:
             monument[PROP_ANECDOTE[LABEL]] = anecdote
 

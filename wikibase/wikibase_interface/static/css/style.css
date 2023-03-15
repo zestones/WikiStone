@@ -117,6 +117,27 @@ h2.fetch-error {
   color: #333;
 }
 
+.search-form select[name="category"] {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 4px;
+  background: #f1f1f1;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 300;
+  color: #555;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  transition: all 0.3s ease;
+}
+
+.search-form select[name="category"]:focus {
+  outline: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  background: #fff;
+  color: #333;
+}
+
 .search-form .icon-btn {
   border: none;
   background: none;
@@ -351,7 +372,7 @@ h2.fetch-error {
 }
 
 .search-infos {
-  margin-top: 24px;
+  margin-top: 52px;
   display: flex;
   justify-content: right;
 }

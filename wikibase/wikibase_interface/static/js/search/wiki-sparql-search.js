@@ -9,7 +9,8 @@ function getFormData(form) {
         query: formData.get('query'),
         city: formData.get('city'),
         postalCode: formData.get('postal-code'),
-        region: formData.get('region')
+        region: formData.get('region'),
+        category: formData.get('category')
     };
 }
 

@@ -108,3 +108,9 @@ PROP_ANECDOTE = {
     TYPE: TYPE_STRING,
     DESCRIPTION: "Récit d'un détail historique, d'un petit fait curieux."
 }
+
+PROP_CATEGORY = {
+    LABEL: "category",
+    TYPE: TYPE_STRING,
+    DESCRIPTION: "représente la catégorie à laquelle appartient un bien culturel, patrimoine, monument, musée, œuvre d'art ou tout autre élément culturel ou artistique."
+}

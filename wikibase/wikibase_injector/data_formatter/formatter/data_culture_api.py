@@ -11,7 +11,8 @@ properties = {
     PROP_REGION[LABEL]: PROP_REGION,
     PROP_PHONE[LABEL]: PROP_PHONE,
     PROP_WEBSITE[LABEL]: PROP_WEBSITE,
-    PROP_LOCATION[LABEL]: PROP_LOCATION   
+    PROP_LOCATION[LABEL]: PROP_LOCATION,
+    PROP_CATEGORY[LABEL]: PROP_CATEGORY
 }
 
 def construct_data_object(data):
@@ -30,7 +31,8 @@ def construct_data_object(data):
         museum["phone"] = record["fields"]["telephone"]
         museum["website"] = record["fields"]["url"]
         museum["location"] = [record["fields"]["latitude"], record["fields"]["longitude"]]
-
+        museum[PROP_CATEGORY[LABEL]] = "Musée"
+        
         # Add museum to museums list
         museums.append(museum)
 

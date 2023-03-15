@@ -1,6 +1,7 @@
 from wikibase_injector.data_formatter.label_properties import *
 import textwrap
 import csv
+import os
 
 # The proprties name and value
 properties = {
@@ -17,6 +18,7 @@ properties = {
     PROP_HISTORIQUE[LABEL]: PROP_HISTORIQUE,
     PROP_CONTACT[LABEL]: PROP_CONTACT,
     PROP_LOCATION[LABEL]: PROP_LOCATION,
+    PROP_CATEGORY[LABEL]: PROP_CATEGORY
 }
 
 # A mapping dictionary for the updated property names
@@ -38,26 +40,32 @@ mapping = {
 }
 
 
-def retrieve_data(): 
+def retrieve_data(file_path="../../data/monuments_historiques_departement42_2023-02-11.csv"):
+    # get the current working directory
+    current_path = os.getcwd()
+
+    # print the current path
+    print("Current Path:", current_path)
+
     # Open the CSV file and read the data
     monuments = []
-    with open("../../data/monuments_historiques_departement42_2023-02-11.csv", "r", encoding="utf-8") as file:
+    with open(file_path, "r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         for row in reader:
             # Extract the relevant data using the updated properties mapping
             monument = {}
             for key, value in mapping.items():
-                
+
                 if key == PROP_LOCATION[LABEL] and (row["latitude"] != '' and row["longitude"] != ''):
                     monument[key] = [row["latitude"], row["longitude"]]
-                elif row[value] != "":     
+                elif row[value] != "":
                     if key == ITEM_DESCRIPTION and len(row[value]) > 250:
-                            monument[key] = textwrap.wrap(row[value], width=250)[0]
+                        monument[key] = textwrap.wrap(row[value], width=250)[0]
                     elif len(row[value]) > 400:
-                            monument[key] = textwrap.wrap(row[value], width=400)[0]
+                        monument[key] = textwrap.wrap(row[value], width=400)[0]
                     else:
                         monument[key] = row[value]
 
             monuments.append(monument)
-   
+
     return properties, monuments
