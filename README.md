@@ -9,7 +9,7 @@ Wikistone est un projet permettant de centraliser les informations sur les monum
 
 ## Comment fonctionne Wikistone ?
 
-Wikistone est un projet qui utilise une base de connaissances (Knowledge Graph) pour stocker les informations sur les monuments historiques du département 42 (Loire). Cette base de connaissances est accessible via une API REST. Cette API est utilisée par une application web permettant de visualiser les informations sur les monuments historiques du département 42 (Loire).
+Wikistone est un projet qui utilise une base de connaissances (Knowledge Graph) pour stocker les informations sur les monuments historiques. Cette base de connaissances est accessible via une API REST. Cette API est utilisée par une application web permettant de visualiser les informations sur les monuments historiques et par une seconde application permettant d'administrer notre base de connaissance.
 
 La base en question est wikibase, une base de connaissances développée par la Wikimedia Foundation. Cette base de connaissances est utilisée par Wikipédia et Wikidata. (voir [wikibase](https://www.mediawiki.org/wiki/Wikibase) et [wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page))
 
