@@ -1,0 +1,7 @@
+{
+	"api_url": "http://localhost/w/api.php",
+    "login_credentials": {
+		"botUsername": "",
+		"botPassword": ""
+	}
+}

@@ -19,8 +19,8 @@ DEFAULT_CONFIG = {
 	"api_url": "http://localhost/w/api.php",
     "oauth_credentials": {},
     "login_credentials": {
-		"botUsername": "Admin@botstone",
-		"botPassword": "i64r0f9ujvu780cd27sovvf19ds4pige"
+		"botUsername": "",
+		"botPassword": ""
 	},
 	"is_bot": True,
 	"summary": "Modified using python-wikibase"
